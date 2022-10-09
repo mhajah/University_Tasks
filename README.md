@@ -1,5 +1,5 @@
 # UWr-sem.-3-2022-23-
-Wszystkie materiały, listy, projekty z semestru 3 na UWr Informatyka
+Wszystkie materiały, listy, projekty z semestru 3 na UWr Informatyka.
 
 Lista przedmiotów:
 1. Analiza Numeryczna (L)
