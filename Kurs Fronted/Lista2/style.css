@@ -1,0 +1,71 @@
+* {
+    font-family: 'Times New Roman', Times, serif;
+    box-sizing: border-box;
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+
+/* STYLING FIRST SECTION */
+#first-section div {
+    color: white;
+    height: 150px;
+    width: 250px;
+    margin: 20px 20px 20px 20px;
+    padding: 15px;
+}
+
+#first-section > #first-box,
+#first-section > #third-box {
+    background-color: #00FF0F;
+}
+
+#first-section > #second-box {
+    border: blue 10px dashed;
+}
+
+/* STYLING SECOND SECTION */
+#second-section > ul > li::marker {
+    color: red;
+}
+
+#second-section .animal-list li:first-child ol li::marker {
+    color: green;
+}
+
+#second-section .animal-list li:nth-child(2) ul li::marker {
+    color: blue;
+}
+
+#second-section .animal-list li li:first-child {
+    color: turquoise;
+}
+
+/* STYLING THIRD SECTION */
+#third-section a {
+    text-decoration: none;
+    color: #437bc4;
+}
+
+#third-section a::before {
+    content: "🔗";
+    display: inline-block;
+}
+
+#third-section a:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+#third-section a:visited {
+    color: violet;
+}
+
+#forth-section img {
+    min-width: 400px;
+    max-width: 1000px;
+    width: 30vw;
+    height: auto;
+}
+
