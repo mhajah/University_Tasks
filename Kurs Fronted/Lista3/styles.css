@@ -1,0 +1,153 @@
+* {
+    font-family: Roboto, Arial;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #FBF5F5;
+}
+
+.main_header {
+    display: flex;
+    justify-content: center;
+    background: white;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+    font-size: 2.5rem;
+}
+
+.content {
+    display: flex;
+}
+
+.navigation {
+    position: sticky;
+    top: 10px;
+}
+
+.navigation__wrapper .navigation {
+    list-style: none;
+    padding: 0px;
+}
+
+.navigation__link {
+    display: flex;
+    height: 4rem;
+    padding: 0 2rem 0 2rem;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.navigation__link:hover {
+    background-color:  rgba(0,0,0,0.1);
+}
+
+.content__main {
+    background-color: #ECECF7;
+    padding: 2rem;
+}
+
+.content__main h2 {
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.content__main h3 {
+    font-size: 1.8rem;
+}
+
+.figure--left {
+    float: left;   
+}
+
+.figure--right {
+    float: right;
+}
+
+.article__figure {
+    margin: 8px 20px 8px 20px;
+}
+
+.article {
+    clear: both;
+}
+
+.figure__caption {
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.warning__wrapper .warning {
+    position: relative;
+    width: 70%;
+    height: 70%;
+    min-width: 500px;
+    background-color: #F4C5B7;
+    border: 3px #FAF9F8 solid;
+    border-radius: 20px;
+}
+
+.warning__wrapper .warning h3 {
+    text-align: center;
+}
+
+.warning__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.warning__figure {
+    margin: 0px 2rem 8px 20px;
+}
+
+.gallery__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+    "first second forth"
+    "first third third";
+    gap: 1rem;
+}
+
+.gallery__wrapper img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery__wrapper .gallery__first_item {
+    grid-area: first;
+}
+
+.gallery__wrapper .gallery__second_item {
+    grid-area: second;
+}
+
+.gallery__wrapper .gallery__third_item {
+    grid-area: third;
+}
+
+.gallery__wrapper .gallery__forth_item {
+    grid-area: forth;
+}
+
+.gallery__image {
+    object-fit: cover;
+}
+
+.footer__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px black solid;
+}
+.footer {
+    height: 7rem;
+    text-align: center;
+    font-size: 0.7rem;
+}
