@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Frontend - Lista 4</title>
+</head>
+<body>
+    <main>
+        <section class="form">
+            <h1 class="form-h1">Contact us!</h1>
+            <div class="form-wrapper">
+                <form>
+                    <div class="input-wrapper">
+                        <label for="name">Name (required)</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>  
+                    
+                    <div class="input-wrapper">
+                        <label for="sname">Surname</label>
+                        <input type="text" id="sname" name="sname">
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="email">Email (required)</label>
+                        <input type="text" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9._%+-]+\.[a-z0-9._%+-]+" required>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9]{9}"  placeholder="123456789">
+                    </div>
+
+                    <div class="input-wrapper">    
+                        <label for="reasons">Reason (required)</label>
+                        <select name="reasons" id="reasons" required>
+                            <option value="" disabled selected>-- select an option --</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="msg">Message (required)</label>
+                        <textarea name="msg" id="msg" cols="30" rows="10" required></textarea>
+                    </div>
+
+                    <div class="newsletter">
+                        <label for="sub">Subscribe to the newsletter </label>
+                        <input type="checkbox" id="sub" name="sub">
+                    </div>    
+                    <input type="submit" id="submit" name="submit" value="Submit">
+
+                </form>
+            </div>
+        </section>
+    </main>
+    
+</body>
+</html>
