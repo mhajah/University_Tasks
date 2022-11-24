@@ -3,6 +3,10 @@
     box-sizing: border-box;
 }
 
+html * {
+    font-size: 1rem;
+}
+
 h2 {
     font-size: 1.8rem;
 }
@@ -12,7 +16,7 @@ h2 {
     color: white;
     height: 150px;
     width: 250px;
-    margin: 20px 20px 20px 20px;
+    margin: 20px;
     padding: 15px;
 }
 
@@ -53,19 +57,19 @@ h2 {
     display: inline-block;
 }
 
+#third-section a:visited {
+    color: violet;
+}
+
 #third-section a:hover {
     color: red;
     text-decoration: underline;
 }
 
-#third-section a:visited {
-    color: violet;
-}
-
 #forth-section img {
     min-width: 400px;
     max-width: 1000px;
-    width: 30vw;
+    width: 65vw;
     height: auto;
 }
 

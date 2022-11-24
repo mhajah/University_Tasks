@@ -1,6 +1,9 @@
+* {
+    box-sizing: border-box;
+}
 html {
     font-family: 'Lato', Courier, monospace;
-    font-size: clamp(14px, calc(2vw + 0.1rem), 32px);
+    font-size: clamp(14px, calc(1vw + 1rem), 24px);
 }
 
 body {
@@ -14,13 +17,12 @@ body {
     justify-content: center;
     flex-direction: column;
     padding: 20px 5px 20px 5px;
-    margin: 75px 5% 75px 5%;
+    margin: 5px 5% 75px 5%;
     box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
-
 .form-h1 {
-    font-size: clamp(18px, calc(3vw + 0.1rem), 44px);
+    font-size: clamp(20px, 1.5rem, 44px);
 }
 
 form {
@@ -34,40 +36,41 @@ form {
     width: 100%;
 }
 
-.input-wrapper {
+.form-input-wrapper {
     display: flex;
     flex-direction: column;
 }
 
-form input[type=text],
-form input#phone,
-form select#reasons {
-    height: clamp(30px, calc(3vw + 0.1rem), 54px);
-    font-size: clamp(12px, calc(2vw + 0.1rem), 32px);
+.form-input-wrapper-input:invalid {
+    border: 1px solid blueviolet;
+}
+
+.form-input-wrapper-input {
+    height: clamp(30px, 2rem, 48px);
+    font-size: clamp(16px, 1rem, 24px);
     margin-bottom: 20px;
 }
 
-
-form textarea#msg {
-    height: 150px;
+.form-input-wrapper-textarea {
+    height: clamp(120px, 3rem, 180px)
 }
 
-.newsletter {
+.form-newsletter-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 20px 0 20px 0;
 }
 
-.newsletter input[type=checkbox] {
+.form-newsletter-wrapper-input[type=checkbox] {
     height: 25px;
     width: 25px;
 }
 
-form input#submit {
-    height: clamp(60px, calc(4vw + 0.1rem), 150px);
+.form-input-wrapper-input#submit {
+    height: clamp(60px, 2.5rem, 150px);
     width: 100%;
-    font-size: clamp(16px, calc(2vw + 0.1rem), 32px);
+    font-size: clamp(18px, 1rem, 32px);
     background-color: blue;
     color: white;
     border: none;
@@ -75,7 +78,7 @@ form input#submit {
 }
 
 @media (pointer: coarse) {
-    .newsletter input[type=checkbox] {
+    .form-newsletter-wrapper-input[type=checkbox] {
         height: 35px;
         width: 35px;
     }
@@ -87,14 +90,12 @@ form input#submit {
         justify-content: space-between;
     }
     
-    .input-wrapper,
-    .newsletter {
+    .form-input-wrapper,
+    .form-newsletter-wrapper {
         width: 100% ;
     }
 
-    .input-wrapper:nth-child(-n+4) {
+    .form-input-wrapper:nth-child(-n+4) {
         width: calc(50% - 10px) ;
     }
-
-
 }

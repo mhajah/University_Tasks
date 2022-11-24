@@ -1,0 +1,66 @@
+
+/* STACKING CONTEXT */
+
+/*
+Reguły width:
+- max-content
+- min-content
+- fit-content
+*/
+
+/*
+Reguła position:
+- static (domyślna)
+- relative (relatywna względem swojej aktualnej pozycji)
+    np. jeśli damy top: 100px, to przesunie się o 100px w góre względem aktualnej pozycji
+- absolute (pozycja absolutna)
+    np. top: 100px -> 100px ustawi się 100px na górę względem początku strony
+- fixed (element zostaje ustalony na stałej pozycji względem ekranu, jeśli będziemy scrollować w dół/górę, to będzie poruszał się z nami)
+- sticky
+*/
+
+/*
+z-index - priorytet wyświetlania na stronie (jeśli elementy na siebie nachodzącą, to górze będzie el. o wyższym indexie)
+*/
+
+/* FLOATS */
+
+/*
+float: right/left/... (opływanie elementu z wybranej strony)
+*/
+
+/* FLEXBOX */
+/*
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+*/
+
+/* GRID */
+/*
+display: grid - nic się nie dzieje, w przeciwienstwie do flexboxa, trzeba wszystko wlasnorecznie ustawic
+
+grid-template-columns: 100px 100px 100px; #3 kolumny po 100px
+                        lub repeat(3, 100px) #to samo co 100px 100px 100px
+grid template-rows: ^...
+1fr - jednostka specjalna dla grida, zabiera całą dostępną przestrzeń
+
+gap: 1rem #przestrzeń pomiędzy elementami grida
+
+justify-content
+align-content
+
+do stylizacji dziecka::
+grid-column-start: 1    #
+grid-column-end: 3      #zajmuje kolumny od 1-3
+grid-row-start, grid-row-end...
+justify-self
+align-self
+
+
+grid-area: first; #do dziecka
+grid-template-areas: #do rodzica
+"first first second"
+"first first third"
+" ............... "
+
+
+*/

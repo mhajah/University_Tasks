@@ -5,10 +5,11 @@ function forEach( a, f ) {
 }
 
 function map( a, f ) { 
+    var b = [];
     for (let i = 0; i < a.length; i++) {
-        a[i] = f(a[i]);
+        b.push(f(a[i]));
     }
-    return a;
+    return b;
 } 
 
 function filter( a, f ) {
@@ -31,4 +32,4 @@ console.log(filter( a, _ => _ < 3 ));
 
 console.log(map( a, _ => _ * 2 )); 
 // [2,4,6,8]
-     vc
+console.log(a);

@@ -2,7 +2,8 @@
 console.log((![]+[]));
 
 //wyciągamy z "false" indeks zerowy, czyli  "f"
-console.log((![]+[])[+[]]);
+aaa= "false"
+console.log(aaa[+[]]);
 
 //tutaj podobnie, wyciągamy "a"
 console.log((![]+[])[+!+[]]);

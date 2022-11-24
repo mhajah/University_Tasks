@@ -3,7 +3,6 @@ function createFs(n) { // tworzy tablicę n funkcji
     
     var _loop = function _loop(i) {
         fs[i] = function () {
-          1;
           return i;
         };
       };

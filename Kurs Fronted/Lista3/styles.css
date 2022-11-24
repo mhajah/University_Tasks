@@ -1,4 +1,4 @@
-* {
+html {
     font-family: Roboto, Arial;
 }
 
@@ -88,10 +88,8 @@ body {
     background-color: #F4C5B7;
     border: 3px #FAF9F8 solid;
     border-radius: 20px;
-}
-
-.warning__wrapper .warning h3 {
-    text-align: center;
+    /* overflow-y: auto; */ /* dodatkowe */
+    /*display: flow-root*/
 }
 
 .warning__wrapper {
@@ -99,6 +97,11 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.warning__wrapper .warning h3 {
+    text-align: center;
+}
+
 
 
 .warning__figure {
@@ -148,6 +151,9 @@ body {
 }
 .footer {
     height: 7rem;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
     font-size: 0.7rem;
 }

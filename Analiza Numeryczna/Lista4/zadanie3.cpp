@@ -84,7 +84,7 @@ void zad5() {
 }
 
 int main() {
-    zad4();
+    zad3();
 
     return 0;
 }
