@@ -80,11 +80,21 @@ void zad7() {
 }
 
 void zad5() {
-
+    double R = 6;
+    double x = 0.2;
+    for (int i = 0; i < 10; i++) {
+        x = x*(2-x*R);
+        cout << x << endl;
+    }
 }
 
+
 int main() {
+<<<<<<< HEAD
     zad3();
+=======
+    zad5();
+>>>>>>> d7516114ce93024a7f3d5a763d2519a4e6c941ef
 
     return 0;
 }
