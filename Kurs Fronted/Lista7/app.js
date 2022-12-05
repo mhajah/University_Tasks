@@ -1,6 +1,7 @@
 const form = document.getElementById("addTaskForm");
 const input = document.getElementById("newTask");
 const list = document.getElementById("list");
+const counter = document.getElementById("taskCounter");
 
 const tab = [];
 
@@ -24,9 +25,15 @@ form.addEventListener("submit", function(e) {
     listWrapper.classList.add("elemList");
     removeButton.addEventListener("click", () => {
         list.removeChild(listWrapper);
+        const itList = list.querySelectorAll(".taskDone");
+        counter.innerText = itList.length;
     });
     doneButton.addEventListener("click", () => {
         element.classList.toggle("taskDone");
+        const itList = list.querySelectorAll(".taskDone");
+        counter.innerText = itList.length;
     })
     input.value = "";
   })
+
+ 

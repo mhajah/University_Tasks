@@ -25,26 +25,29 @@ body {
     border-bottom: 1px solid lightgrey;
     padding-left: 20px;
     display: flex;
+    justify-content:space-between;
     align-items: center;
-    justify-content: space-between;
-}
-
-.mainSection__todoInterfaceWrapper_content_header_form {
-    padding-right: 20px;
+    flex-wrap: wrap;
 }
 
 .mainSection__todoInterfaceWrapper_content_header_form form {
     display: flex;
     align-items: center;
     justify-content: right;
+    margin-right: 20px;
 }
 
+
 .mainSection__todoInterfaceWrapper_content_header_form form input {
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    height: 64px;
-    font-size: 16px
+    border: 0;
+    border-bottom: 2px solid gray;
+    outline: 0;
+    font-size: 1.3rem;
+    color: gray;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+    width: 20vw;
 }
 
 .mainSection__todoInterfaceWrapper_content_header_form form button {
@@ -72,7 +75,6 @@ body {
 
 .mainSection__todoInterfaceWrapper_content_body ul {
     list-style: none;
-    margin: 0;
     padding: 20px 20px 20px 20px;
     font-size: 20px;
     display: flex;
@@ -91,6 +93,15 @@ body {
     border-bottom: 1px dashed lightgrey;
     width: 70%;
     overflow-y: auto;
+}
+
+.mainSection__todoInterfaceWrapper_content_body ul .elemList span {
+    width: 30%;
+    display: flex;
+    justify-content: right;
+}
+.mainSection__todoInterfaceWrapper_content_body ul .elemList span .taskButton:first-child {
+    margin-right: 20px;
 }
 
 .taskButton {
