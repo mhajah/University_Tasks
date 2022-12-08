@@ -1,0 +1,19 @@
+body {
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+}
+
+.pokedex {
+    background-color: yellow;
+    width: 80vw;
+    height: 90vh;
+    margin-top: 30px;
+    display: flex;
+    border-radius: 20px;
+}
+
+.pokedex-aside {
+    border-right: 2px solid red;
+    width: 30%;
+}
