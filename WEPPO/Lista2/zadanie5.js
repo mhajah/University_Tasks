@@ -21,7 +21,8 @@ var myObject2 = {
 
 Object.defineProperty (myObject2, 'inc', { 
     get:function() {
-        return this.myProperty + 1;
+        this.myProperty++;
+        return this.myProperty;
     },
     set:function(elem) {
         return this.myProperty = elem;
@@ -31,5 +32,7 @@ Object.defineProperty (myObject2, 'inc', {
 console.log(myObject2.inc)
 myObject2.inc = 10;
 console.log(myObject2.inc);
+myObject2.tst = 20;
+console.log(myObject2.tst);
 
 

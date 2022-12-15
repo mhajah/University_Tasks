@@ -1,4 +1,4 @@
-function fib(n) {
+function fib(n: number): number {
     if (n > 1 ) {
         return fib(n-1) + fib(n-2);
     } else {
@@ -6,10 +6,10 @@ function fib(n) {
     }
 }
 
-function memo(f) {
-    var cache = [];
+function memo(f: ((n: number) => number)): ((n: number) => number) {
+    var cache: Array<number> = [];
 
-    return function(n) {
+    return function(n: number) {
         if (cache[n] === undefined) {
             var f_n = f(n);
             cache[n] = f_n;
@@ -22,6 +22,5 @@ function memo(f) {
 
 //Referencja na funkcję
 //Funckja fib zaczyna wywoływać nie samą siebie, ale samą siebie w wersji zmemoizowanej.
-var mfib = memo(fib);
 
-console.log(memo(fib)(5));
+console.log(memo(fib)(42));
