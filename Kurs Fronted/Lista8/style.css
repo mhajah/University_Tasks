@@ -1,7 +1,8 @@
-body {
+ body {
     background-color: blue;
     display: flex;
     justify-content: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .pokedex {
@@ -16,4 +17,66 @@ body {
 .pokedex-aside {
     border-right: 2px solid red;
     width: 30%;
+    overflow-y: auto;
+}
+
+.pokedex-aside-list {
+    list-style: none;
+    padding: 0;
+}
+
+.pokedex-aside-header {
+    font-size: 3vw;
+    margin: 15px 0 15px 0;
+    text-align: center;
+    color: red;
+}
+
+.pokedex-aside-list-element {
+    color: yellow;
+    background-color: red;
+    font-size: 24px;
+    padding: 5px;
+    margin: 5px 15px 5px 15px;
+    border-radius: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    overflow-x: auto;
+    transition: 0.3s;
+}
+.pokedex-aside-list-element:hover {
+    background-color: blue;
+}
+
+.pokedex-content {
+    width: 70%;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.pokedex-content-pokemonInfo {
+    border: 1px dashed red;
+    margin: 0 10% 0 10%;
+    border-radius: 10px;
+}
+
+.pokedex-content-pokemonInfo #pokemonName {
+    text-transform: uppercase;
+}
+
+.pokedex-content-pokemonInfo #pokemonSpecies {
+    display: flex;
+    justify-content: center;
+}
+.pokedex-content-pokemonInfo #pokemonImg {
+    background-color: white;
+    border-radius: 50%;
+}
+
+.pokedex-content-pokemonInfo-pokemonSpiece {
+    background-color: blue;
+    color: white;
+    padding: 1vw;
+    margin: 20px 5px 20px 5px;
+    border-radius: 10px;
 }
