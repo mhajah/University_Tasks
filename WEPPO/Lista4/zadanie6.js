@@ -6,7 +6,6 @@ async function readLogs() {
     const data = fs.createReadStream('logs.txt');
     const rl = readln.createInterface({
         input: data,
-        crlfDelay: Infinity
     });
     for await (const line of rl) {
         console.log(line);

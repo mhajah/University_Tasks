@@ -6,10 +6,11 @@ function fib(n: number): number {
     }
 }
 
-function memo(f: ((n: number) => number)): ((n: number) => number) {
-    var cache: Array<number> = [];
+function memo<V>(f: ((n: number) => V)): ((n: number) => V) {
+    var cache: Array<V> = [];
 
     return function(n: number) {
+
         if (cache[n] === undefined) {
             var f_n = f(n);
             cache[n] = f_n;

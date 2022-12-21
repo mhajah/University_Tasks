@@ -250,32 +250,118 @@ async function test3() {
 //test3();
 
 
+console.log("==================ZADANIE8===========");
+const addToLibrary = (props) => {
+    let media;
+    switch(props.type) {
+        case "book": 
+            media = new Book(props)
+            libraryStore.push(media)
+            return media;
+        case "movie": 
+            media = new Movie(props)
+            libraryStore.push(media)
+            return media;
+        default:
+            try {
+                media = new Media(props);
+                libraryStore.push(media)
+                return media;
+            }
+            catch(e) {
+                console.log(e);
+                return undefined;
+            }
+    }
+}
 
-  // const addToLibrary = (props) => {
-//     switch(props.type) {
-//         case "book": 
-//         const media = new Book(props)
-//         libraryStore.push(media)
-//         return media;
-//         case "movie": 
-//         const media = new Movie(props)
-//         libraryStore.push(media)
-//         return media;
-//         default: 
-//         const media = new Media(props);
-//         libraryStore.push(media)
-//         return media;
-//     }
-// }
+const book2 = addToLibrary({
+    type: 'book',
+    title: "alice's adventures in wonderland",
+    author: 'lewis carroll',
+    pages: 136
+  })
+  const movie2 = addToLibrary({
+    type: 'movie',
+    title: "alice in wonderland",
+    director: 'tim burton',
+    length: 108
+  })
+  const media2 = addToLibrary({
+    title: 'Media'
+  })
+  
+  console.log(libraryStore) 
+  /*
+  [ Book { _title: 'Alice\'s Adventures In Wonderland',
+      _ratings: [],
+      _available: true,
+      _author: 'Lewis Carroll',
+      _pages: 136 
+    },
+    Movie { _title: 'Alice In Wonderland',
+      _ratings: [],
+      _available: true,
+      _director: 'Tim Burton',
+      _length: 108 
+    },
+    Media { _title: 'Media', _ratings: [], _available: true }
+  ]
+  */
 
-// function order(title) {
-//   for (let i = 0; i < libraryStore.length; i++) {
-//     if (libraryStore[i].title === title) {
-//       libraryStore[i].orderMedia().then(
-//         console.log("Order completed!")
-//       ).catch((e) => {
-//         console.log("Sorry! " + e)
-//       })
-//     }
-//   }
-// }
+console.log("==================ZADANIE9===========");
+function bulkAddToLibrary(array) {
+    array.forEach(element => {
+        addToLibrary(element);
+    });
+    return array;
+}
+
+const [book3, movie3, media3] = bulkAddToLibrary([
+    {
+      type: 'book',
+      title: "alice's adventures in wonderland",
+      author: 'lewis carroll',
+      pages: 136
+    }, 
+    {
+      type: 'movie',
+      title: "alice in wonderland",
+      director: 'tim burton',
+      length: 108
+    }, 
+    {
+      title: 'Media'
+    }
+  ])
+  
+  console.log(libraryStore) 
+  /*
+  [ Book { _title: 'Alice\'s Adventures In Wonderland',
+      _ratings: [],
+      _available: true,
+      _author: 'Lewis Carroll',
+      _pages: 136 
+    },
+    Movie { _title: 'Alice In Wonderland',
+      _ratings: [],
+      _available: true,
+      _director: 'Tim Burton',
+      _length: 108 
+    },
+    Media { _title: 'Media', _ratings: [], _available: true }
+  ]
+  */
+
+
+function order(title) {
+  libraryStore.forEach(element => {
+    if (element.title === title) {
+        element[i].orderMedia().then(
+          console.log("Order completed!")
+        ).catch((e) => {
+          console.log("Sorry! " + e)
+        })
+      } 
+  });
+}

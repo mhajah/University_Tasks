@@ -1,6 +1,5 @@
 var Foo = function () {
-    this.egProperty = "xyz";
-
+    
     this.Bar = function () {
         var x = Qux();
         return x;
@@ -9,6 +8,8 @@ var Foo = function () {
     function Qux() {
         return "AA";
     }
+
+    var name = "test";
 
 }
 
