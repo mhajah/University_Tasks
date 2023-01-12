@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Wybierz swój ulubiony przedmiot: </h2>
+    <%- include('radio', {
+        name: "radio1",
+        options: [
+        { value: 1, text: "WEPPO"},
+        { value: 2, text: "Wybrane Elementy Praktyki Projektowania Oprogramowania "},
+        { value: 3, text: "W.E.P.P.O "}
+        ]
+    }) %>
+</body>
+</html>
