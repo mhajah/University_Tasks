@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="box">Text</p>
+    <script src="app.js"> //tak się dodaje plik js
+        document.getElementById("box").style.backgroundColor = "red";
+    </script>
+    <script async> //atrybut async ładuje skrypt w trakcie ładowania html
+
+    </script>
+    <script defer> //laduje calego html i skrypt, a potem wykonuje skrypt
+        //zwykle uzywamy async, czasem defer, ale raczej nie uzywamy bez atrybutu
+    </script> 
+</body>
+</html>

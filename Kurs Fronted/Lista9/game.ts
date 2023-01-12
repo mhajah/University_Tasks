@@ -136,7 +136,7 @@ type options = {
     answer: string
 }
 
-const generateGame = (options: options[], questionFunction: Function) => {
+const generateGame = (options: options[], questionFunction: ((s: string) => string)) => {
     const valid = getRandomNumber(3);
 
     console.log(`Cheatmode: Valid option is option ${valid + 1}`);
@@ -214,8 +214,8 @@ const game = async () => {
                 "Problem with the connection. Try refreshing the page.";
             return;
         }
-
-        //document.getElementById("response")!.innerText = e.message;
+        //^if
+        document.getElementById("response")!.innerText = (e as Error).message;
     }
 };
 

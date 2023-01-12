@@ -24,6 +24,6 @@ forEach(a, function (_) { console.log(_); });
 // [1,2,3,4]
 console.log(filter(a, function (_) { return _ < 3; }));
 // [1,2]    
-console.log(map(a, function (_) { return _ * 2; }));
+console.log(map(a, function (_) { return String(_); }));
 // [2,4,6,8]
 console.log(a);

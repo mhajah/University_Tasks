@@ -11,10 +11,11 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\app.ts",
+            "program": "${workspaceFolder}\\zadanie2.ts",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
-            ]
+            ],
+            "runtimeArgs": ["-r", "ts-node/register"]
         }
     ]
 }

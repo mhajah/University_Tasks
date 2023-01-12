@@ -1,0 +1,15 @@
+TYPESCRIPT
+
+
+
+TypeScript w przeciwieństwie do JS jest kompilowany.
+TypeScript jest językiem strukturalnym
+
+Plusy z języka typowanego:
+- kontrola błędów (również w czasie rzeczywistym)
+
+export default
+
+
+inferencja typow
+^kompilator domysla sie jaki zmienna/funckja ma typ, jesli to oczywiste
