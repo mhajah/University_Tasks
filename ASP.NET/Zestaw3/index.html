@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="#" onclick="sendPost()" id="postButton">post button</a>
+    <br>
+    <input type="submit" value="żądanie GET" onclick="sendGet()"/>
+</body>
+
+<script>
+    var postButton = document.getElementById('postButton');
+
+    function sendPost () {
+        var form = document.createElement('form');
+        form.setAttribute('method', 'post');
+        form.setAttribute('action', 'http://google.com');
+        form.style.display = 'hidden';
+        document.body.appendChild(form)
+        form.submit();
+    }   
+
+    function sendGet() {
+        var queryString = 'p1=qasdasd&p2=adasda'
+        var newUrl = 'strona.aspx?' + queryString;
+        document.location.href = newUrl;
+    }
+</script>
+
+</html>

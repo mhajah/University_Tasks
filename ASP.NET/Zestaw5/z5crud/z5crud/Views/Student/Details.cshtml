@@ -1,0 +1,58 @@
+﻿@model z5crud.Models.StudentModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>StudentModel</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.imie)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.imie)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.nazwisko)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.nazwisko)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.rok)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.rok)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.indeks)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.indeks)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

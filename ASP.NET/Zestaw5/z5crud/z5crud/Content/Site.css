@@ -1,0 +1,37 @@
+﻿body {
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Arial;
+}
+
+a {
+    text-decoration: none;
+    color: aqua;
+    padding: 10px;
+    margin: 15px 5px 15px 5px;
+    border: 1px solid aqua;
+    border-radius: 50px;
+}
+
+table {
+    width: 50%;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    border: solid 1px green;
+    text-align: center;
+}
+
+td {
+    padding: 10px;
+}
+

@@ -1,0 +1,61 @@
+﻿@model z3.Models.TestModel
+
+@{
+    ViewBag.Title = "Upload File";
+    var listaElementow = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "1", Text = "Opcja 1" },
+                new SelectListItem { Value = "2", Text = "Opcja 2" },
+                new SelectListItem { Value = "3", Text = "Opcja 3" }
+            };
+    ViewBag.ListaElementow = listaElementow;
+
+}
+
+<h2>Upload File</h2>
+
+@using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" />
+    <br />
+    <input type="submit" value="Upload" />
+}
+@using (Html.BeginForm())
+{
+    <section class="Zadanie 4">
+        Zadanie 4
+        <div>
+            @Html.ActionLink("Kontakt", "Contact", "Home")
+        </div>
+        <div>
+            <p>Czy masz 18 lat?</p>
+            @Html.CheckBoxFor(model => model.flag)
+        </div>
+        <div>
+            <p>Haslo</p>
+            @Html.PasswordFor(model => model.haslo)
+        </div>
+        <div>
+            <p>Rozmiar koszulki</p>
+            @Html.RadioButtonFor(model => model.rozmiarKoszulki, "M") M<br />
+            @Html.RadioButtonFor(model => model.rozmiarKoszulki, "L") L<br />
+            @Html.RadioButtonFor(model => model.rozmiarKoszulki, "XL") XL <br />
+        </div>
+        <div>
+            <p>Imie</p>
+            @Html.TextBoxFor(model => model.imie)
+        </div>
+        <div>
+            <p>Opisz siebie</p>
+            @Html.TextAreaFor(model => model.opis, 4, 10, null)
+        </div>
+        <div>
+
+            @Html.DropDownListFor(model => model.listResult, (IEnumerable<SelectListItem>)ViewBag.ListaElementow)
+
+        </div>
+    </section>
+    <div class="form-group">
+        <input type="submit" value="Prześlij zgłoszenie" class="btn btn-primary" />
+    </div>
+}

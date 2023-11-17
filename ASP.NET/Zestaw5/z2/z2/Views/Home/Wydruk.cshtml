@@ -1,0 +1,39 @@
+﻿@model z2.Models.ZgloszenieModel
+
+<h2>Printable Task Submission</h2>
+
+<table class="table">
+    <tr>
+        <th>First Name</th>
+        <td>@Model.Imie</td>
+    </tr>
+    <tr>
+        <th>Last Name</th>
+        <td>@Model.Nazwisko</td>
+    </tr>
+    <tr>
+        <th>Date</th>
+        <td>@Model.Data.ToShortDateString()</td>
+    </tr>
+</table>
+
+<h4>Task Declarations:</h4>
+
+<table class="table">
+    <tr>
+        <th>Task Number</th>
+        <th>Points</th>
+    </tr>
+        @for (int i = 0; i < Model.Zadania.Count; i++)
+    {
+        <tr>
+            <td>@i</td>
+            <td>@Model.Zadania[i].Punkty</td>
+        </tr>
+    }
+
+</table>
+
+<!-- Dodaj dowolne dodatkowe elementy, które chcesz uwzględnić w formularzu wydruku -->
+
+<button onclick="window.print()">Print</button>

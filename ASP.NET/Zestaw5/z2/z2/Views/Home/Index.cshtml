@@ -1,0 +1,44 @@
+﻿@model z2.Models.ZgloszenieModel
+
+@{
+    ViewBag.Title = "Formularz Zgłoszenia";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Imie)
+        @Html.TextBoxFor(model => model.Imie, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Imie)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nazwisko)
+        @Html.TextBoxFor(model => model.Nazwisko, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Nazwisko)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Data)
+        @Html.TextBoxFor(model => model.Data, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker" })
+        @Html.ValidationMessageFor(model => model.Data)
+    </div>
+
+    <h3>Zadania</h3>
+    for (int i = 0; i < 10; i++)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Zadania[i].Punkty)
+            @Html.TextBoxFor(model => model.Zadania[i].Punkty, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Zadania[i].Punkty)
+        </div>
+    }
+
+    <div class="form-group">
+        <input type="submit" value="Prześlij zgłoszenie" class="btn btn-primary" />
+    </div>
+}
