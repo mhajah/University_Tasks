@@ -1,13 +1,13 @@
-import requests # see https://2.python-requests.org/en/master/
+import requests
+from dane import *
  
-key = 'Co7nORWHJnvP-DdRiYbjyQH-YrQRD3h9'
 text = "a text"
 t_title = "a_paste_title"
  
 login_data = {
-    'api_dev_key': key,
-    'api_user_name': 'rajso167',
-    'api_user_password': 'haslodoPastebin123'
+    'api_dev_key': klucz,
+    'api_user_name': nazwa,
+    'api_user_password': haslo
     }
 data = {
     'api_option': 'paste',
