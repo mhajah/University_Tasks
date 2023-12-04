@@ -1,0 +1,14 @@
+﻿
+
+@{
+    ViewBag.Title = "Home Page";
+    var user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+    var principal = this.User;
+
+
+}
+
+<main>
+    <div>@user</div>
+    <div>@principal</div>
+</main>
