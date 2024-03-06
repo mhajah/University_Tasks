@@ -1,0 +1,5 @@
+white a1 b2 c3
+black g8 h1 c4
+white a1 e3 b7
+black h7 a2 f2
+black a2 e4 a4

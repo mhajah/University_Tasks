@@ -35,14 +35,14 @@ public class MenuBarListener implements ActionListener {
                 break;
             }
             case "PIONKI_KOLOR": {
-                String title = config.getResourceBundle().getString("modal.counter_color.title");
+                String title = config.getResourceBundle().getString("pionek.kolor.pop.tytul");
                 color = JColorChooser.showDialog(null, title, samotnik.getCounterColor());
                 samotnik.setCounterColor(color);
                 break;
             }
             case "WSKAZNIK_KOLOR": {
-                String title = config.getResourceBundle().getString("modal.selection_color.title");
-                String text = config.getResourceBundle().getString("modal.selection_color.text");
+                String title = config.getResourceBundle().getString("pionek.kolor.tytul");
+                String text = config.getResourceBundle().getString("pionek.kolor.tresc");
                 String[] colors = {"NIEBIESKI", "ZOLTY", "ZIELONY"};
                 String selection = (String) JOptionPane.showInputDialog(null, text, title, JOptionPane.WARNING_MESSAGE, null, colors, colors[0]);
                 switch (selection) {
@@ -59,10 +59,10 @@ public class MenuBarListener implements ActionListener {
                 break;
             }
             case "BRITISH":
-                samotnik.setVersion(WersjaGry.BRITISH);
+                samotnik.setWersja(WersjaGry.BRITISH);
                 break;
             case "EUROPEAN":
-                samotnik.setVersion(WersjaGry.EUROPEAN);
+                samotnik.setWersja(WersjaGry.EUROPEAN);
                 break;
         }
         samotnik.update();

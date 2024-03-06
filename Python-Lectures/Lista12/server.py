@@ -48,7 +48,7 @@ def add_movie():
         return jsonify({'error': 'Title is required'}), 400
     
     db = get_db()
-    db.execute(f"INSERT INTO Movies VALUES (NULL, '{request.json["title"]}', '{request.json["director_id"]}', '{request.json["release_year"]}', '{request.json["movie_length"]}')")
+    db.execute(f"INSERT INTO Movies VALUES (NULL, '{request.json['title']}', '{request.json['director_id']}', '{request.json['release_year']}', '{request.json['movie_length']}')")
     db.commit()
 
     cur = db.execute('SELECT last_insert_rowid()')

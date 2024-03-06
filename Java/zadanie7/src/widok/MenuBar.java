@@ -1,6 +1,6 @@
 package widok;
 
-import listeners.KeyListener;
+import listeners.MoveListener;
 import listeners.MenuBarListener;
 import plansza.Board;
 import narzedzia.config;
@@ -106,11 +106,11 @@ public class MenuBar extends JMenuBar {
     private void addListener(Board board) {
         mNewGame.addActionListener(new MenuBarListener());
         mEnd.addActionListener(new MenuBarListener());
-        mSelect.addActionListener(new KeyListener(board));
-        mLeft.addActionListener(new KeyListener(board));
-        mRight.addActionListener(new KeyListener(board));
-        mUp.addActionListener(new KeyListener(board));
-        mDown.addActionListener(new KeyListener(board));
+        mSelect.addActionListener(new MoveListener(board));
+        mLeft.addActionListener(new MoveListener(board));
+        mRight.addActionListener(new MoveListener(board));
+        mUp.addActionListener(new MoveListener(board));
+        mDown.addActionListener(new MoveListener(board));
         mIGame.addActionListener(new MenuBarListener());
         mCounterColor.addActionListener(new MenuBarListener());
         rBritish.addActionListener(new MenuBarListener());

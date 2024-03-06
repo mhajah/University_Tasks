@@ -5,9 +5,10 @@ import narzedzia.WersjaGry;
 import widok.MainWindow;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.io.*;
 
-public class Samotnik {
+public class Samotnik implements Serializable {
 
     private static Samotnik INSTANCE;
     private Color counterColor;
@@ -16,15 +17,15 @@ public class Samotnik {
     private final Color selectionColor;
     public static MainWindow window;
     public static Board board;
-    private WersjaGry version;
-//    private static GameState gameState;
+    private WersjaGry wersja;
+    private static GameState gameState;
 
     private Samotnik() {
         counterColor = Color.BLACK;
         backgroundColor = Color.WHITE;
         pointColor = Color.GREEN;
         selectionColor = Color.RED;
-        version = WersjaGry.BRITISH;
+        wersja = WersjaGry.BRITISH;
     }
 
     public static Samotnik rozpocznij() {
@@ -32,41 +33,42 @@ public class Samotnik {
             INSTANCE = new Samotnik();
         }
 
+
         return INSTANCE;
     }
 
-//    public void saveGame() {
-//        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("solitaire.ser"))) {
-//            oos.writeObject(gameState);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void saveGame() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("solitaire.ser"))) {
+            oos.writeObject(gameState);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-//    public static void loadGame() {
-//        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("solitaire.ser"))) {
-//            gameState = (GameState) ois.readObject();
-//            File file = new File("solitaire.ser");
-//            if (file.exists()) {
-//                file.delete();
-//            }
-//        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//        board = gameState.board;
-//        window = gameState.window;
-//    }
+    public static void loadGame() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("solitaire.ser"))) {
+            gameState = (GameState) ois.readObject();
+            File file = new File("solitaire.ser");
+            if (file.exists()) {
+                file.delete();
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        board = gameState.board;
+        window = gameState.window;
+    }
 
     public void init() {
-        board = new Board(version);
+        board = new Board(wersja);
         window = new MainWindow(board);
-//        gameState = new GameState(window, board);
+        gameState = new GameState(window, board);
     }
 
     public void newGame() {
 //        loadGame();
-        board.setup(version);
+        board.setup(wersja);
     }
 
     public Color getBackgroundColor() {
@@ -104,9 +106,9 @@ public class Samotnik {
         return !board.sprawdzRuch();
     }
 
-    public void setVersion(WersjaGry version) {
+    public void setWersja(WersjaGry wersja) {
 
-        this.version = version;
+        this.wersja = wersja;
     }
 
     public void update() {
@@ -115,7 +117,7 @@ public class Samotnik {
     }
 
     public void close() {
-//        saveGame();
+        saveGame();
         window.dispose();
     }
 

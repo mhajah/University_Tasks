@@ -1,11 +1,16 @@
 package prezentacja;
 import rozgrywka.Gra;
 import obliczenia.Wymierna;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 public class Okno extends Frame {
+    private static final Logger logger = Logger.getLogger(Okno.class.getName());
     private Gra gra;
     private TextField licznikGUI, mianownikGUI;
     private Scrollbar probyGUI, zakresGUI;
@@ -14,16 +19,19 @@ public class Okno extends Frame {
     public Okno() {
         gra = new Gra();
         licznikGUI = new TextField();
+        configureLogger();
+        logger.info("Aplikacja uruchomiona.");
 
         mianownikGUI = new TextField();
         mianownikGUI.setPreferredSize(new Dimension(50,20));
-        probyGUI = new Scrollbar(Scrollbar.HORIZONTAL, 0, 1, 0, 10);
+        probyGUI = new Scrollbar(Scrollbar.HORIZONTAL, 0, 1, 0, 5);
         zakresGUI = new Scrollbar(Scrollbar.HORIZONTAL, 5, 1, 1, 20);
 
         wyslijProbeButton = new Button("Sprawdz");
         nowaGraButton = new Button("Nowa gra");
         zakonczButton = new Button("Zakoncz");
         komunikatGUI = new Label("");
+
 
         wyslijProbeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
@@ -83,13 +91,17 @@ public class Okno extends Frame {
 
     }
     private void wyslijPropozycje() {
-
         int licznik = Integer.parseInt(licznikGUI.getText());
         int mianownik = Integer.parseInt(mianownikGUI.getText());
         probyGUI.setValue(gra.licznikProb);
         Wymierna propozycja = new Wymierna(licznik, mianownik);
         gra.sprawdzPropozycje(propozycja);
         komunikatGUI.setText(gra.komunikat);
+        logger.info("Wyslano probe: " + propozycja);
+        if (gra.komunikat.equals("Zgadza się, wygrałeś!"))
+            logger.info("Gra zakonczona zwyciestwem ");
+        if (gra.komunikat.equals("Przekroczono liczbę prób. Przegrałeś."))
+            logger.info("Gra zakonczona porażką.");
 
     }
 
@@ -102,5 +114,16 @@ public class Okno extends Frame {
 
         licznikGUI.setText("");
         mianownikGUI.setText("");
+        logger.info("Rozpoczeto nowa gre.");
     }
+
+    private void configureLogger() {
+        try {
+            FileHandler fileHandler = new FileHandler("rozgrywka.log");
+            logger.addHandler(fileHandler);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Błąd konfiguracji loggera", e);
+        }
+    }
+
 }

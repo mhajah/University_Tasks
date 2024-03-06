@@ -11,7 +11,6 @@ public class BST <T extends Comparable<T>> implements Dictionary<T>
         {
             left=null;
             right=null;
-            parent=null;
             this.data=data;
         }
     }
@@ -40,23 +39,19 @@ public class BST <T extends Comparable<T>> implements Dictionary<T>
 
     private boolean searchRecursive(Node<T> node, T data)
     {
-        if (node == null)
-        {
+        if (node == null) {
             return false;
         }
 
         int comparisonResult = data.compareTo(node.data);
 
-        if (comparisonResult == 0)
-        {
+        if (comparisonResult == 0) {
             return true;
         }
-        else if (comparisonResult < 0)
-        {
+        else if (comparisonResult < 0) {
             return searchRecursive(node.left, data);
         }
-        else
-        {
+        else {
             return searchRecursive(node.right, data);
         }
     }
@@ -64,8 +59,7 @@ public class BST <T extends Comparable<T>> implements Dictionary<T>
     public T min()
     {
         Node<T> x=root;
-        while (x.left!=null)
-        {
+        while (x.left!=null) {
             x=x.left;
         }
         return x.data;
@@ -74,35 +68,30 @@ public class BST <T extends Comparable<T>> implements Dictionary<T>
     public T max()
     {
         Node<T> x=root;
-        while(x.right!=null)
-        {
+        while(x.right!=null) {
             x=x.right;
         }
         return x.data;
     }
 
-    public void insert(T data)
-    {
-
+    public void insert(T data) {
         root = insertRecursive(root, data);
         size++;
     }
 
     private Node<T> insertRecursive(Node<T> node, T data)
     {
-        if (node == null)
-        {
+        if (node == null) {
             return new Node<>(data);
         }
 
+        //Integer
         int compareRes = data.compareTo(node.data);
-        if (compareRes < 0)
-        {
+        if (compareRes < 0) {
             node.left = insertRecursive(node.left, data);
             node.left.parent = node;
         }
-        else if (compareRes > 0)
-        {
+        else if (compareRes > 0) {
             node.right = insertRecursive(node.right, data);
             node.right.parent = node;
         }
@@ -111,27 +100,23 @@ public class BST <T extends Comparable<T>> implements Dictionary<T>
     }
 
 
-    public void remove(T data)
-    {
+    public void remove(T data) {
         root = removeRecursive(root, data);
         size--;
     }
 
     private Node<T> removeRecursive(Node<T> node, T data)
     {
-        if (node == null)
-        {
+        if (node == null) {
             return null;
         }
 
         int comparisonResult = data.compareTo(node.data);
 
-        if (comparisonResult < 0)
-        {
+        if (comparisonResult < 0) {
             node.left = removeRecursive(node.left, data);
         }
-        else if (comparisonResult > 0)
-        {
+        else if (comparisonResult > 0) {
             node.right = removeRecursive(node.right, data);
         }
         else

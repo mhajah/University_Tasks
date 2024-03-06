@@ -1,8 +1,8 @@
 import requests
 from dane import *
  
-text = "a text"
-t_title = "a_paste_title"
+text = "1234"
+t_title = "tytul"
  
 login_data = {
     'api_dev_key': klucz,
@@ -11,7 +11,7 @@ login_data = {
     }
 data = {
     'api_option': 'paste',
-    'api_dev_key':key,
+    'api_dev_key':klucz,
     'api_paste_code':text,
     'api_paste_name':t_title,
     }
