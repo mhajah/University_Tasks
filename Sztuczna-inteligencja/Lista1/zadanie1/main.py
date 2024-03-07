@@ -17,43 +17,43 @@ class chess():
     def board_print(self):
         debug_print(self.wking, self.rook, self.bking)
     
-    # Zamiana z szachowej notacji (np. "a1") na pozycję na planszy (np. (0,0))
-    def posInt(self, s):
+    # Zamiana z szachowej notacji (np. "a1") na koordynaty na planszy (np. (0,0))
+    def coords(self, s):
         column = ord(s[0]) - ord('a')
         row = ord(s[1]) - ord('1')
         return column, row
 
-    # Zamiana z pozycji 2D na planszy na notację szachową (np. (0,0) -> "a1")
-    def posStr(self, col, row):
+    # Zamiana z koordynatów na planszy na notację szachową (np. (0,0) -> "a1")
+    def chessNotation(self, col, row):
         return str(chr(col + ord('a'))) + str(chr(row + ord('1'))) 
 
     # Pola osiągalne przez wieze
     def generateRookMoves(self, obstacles):
         attacks = [self.rook]
-        col, row = self.posInt(self.rook)
+        col, row = self.coords(self.rook)
 
         # Góra
         r = row - 1
         while r >= 0:
-            attacks.append(self.posStr(col, r))
+            attacks.append(self.chessNotation(col, r))
             if (col, r) in obstacles: break #czy stoi na przeszkodzie?
             r -= 1  
         # Dół
         r = row + 1
         while r < 8:
-            attacks.append(self.posStr(col, r))
+            attacks.append(self.chessNotation(col, r))
             if (col, r) in obstacles: break
             r += 1  
         # Lewo
         c = col - 1
         while c >= 0:
-            attacks.append(self.posStr(c, row))
+            attacks.append(self.chessNotation(c, row))
             if (c, row) in obstacles: break
             c -= 1 
         # Prawo
         c = col + 1
         while c < 8:
-            attacks.append(self.posStr(c, row))
+            attacks.append(self.chessNotation(c, row))
             if (c, row) in obstacles: break
             c += 1 
 
@@ -62,7 +62,7 @@ class chess():
     # Pozycje atakowane przez króla
     def kingAttacks(self, king):
         attacks = []
-        col, row = self.posInt(king)
+        col, row = self.coords(king)
 
         # Definiujemy kierunki, w których król może się poruszać
         directions = [(dx, dy) for dx in range(-1, 2) for dy in range(-1, 2) if (dx, dy) != (0, 0)]
@@ -70,7 +70,7 @@ class chess():
         # Iterujemy przez wszystkie możliwe kierunki
         for dx, dy in directions:
             new_col, new_row = col + dx, row + dy
-            position = self.posStr(new_col, new_row)
+            position = self.chessNotation(new_col, new_row)
 
             # Dodajemy pozycję do ataków, jeśli znajduje się na planszy
             if position in self.board:
@@ -84,12 +84,11 @@ class chess():
 
     # Możliwe ruchy białej wieży (przeszkodą jest zarówno biały, jak i czarny król)
     def rookPossibleMoves(self):
-        white_rook_moves = self.generateRookMoves([self.posInt(self.wking), self.posInt(self.bking)])
+        white_rook_moves = self.generateRookMoves([self.coords(self.wking), self.coords(self.bking)])
         black_king_attacks = self.kingAttacks(self.bking)
         valid_moves = white_rook_moves - black_king_attacks
         return valid_moves - set([self.wking, self.bking])
-
-    # Generate next white king move
+    
     def whiteKingPossibleMoves(self):
         return self.kingAttacks(self.wking) - self.kingAttacks(self.bking) - set([self.rook])
 
@@ -105,7 +104,7 @@ class chess():
         if self.color == "black":
             return self.blackKingPossibleMoves() == set() and not self.isCheckmate()
 
-    # Based on a current state, returns all possible moves
+    # Wszystkie możliwe ruchy
     def generateAllPossibleMoves(self):
         if self.color == "black":
             return [("white", self.wking, self.rook, bking) for bking in self.blackKingPossibleMoves()]

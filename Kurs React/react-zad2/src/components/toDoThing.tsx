@@ -13,9 +13,11 @@ interface IProps {
 export default function ToDoList({content, done = false, onTap, deleteTask}: IProps) {
 
     return (
-        <li className={done ? "thing done" : "thing"} >
-            <button className='removeThing' onClick={deleteTask}>X</button>
-            <p onClick={onTap}>{content}</p>
+        <li className={done ? "thing done" : "thing"} onClick={onTap}>
+            <button className='removeThing' onClick={(e) => {
+                e.stopPropagation()
+                deleteTask()}}>X</button>
+            <p>{content}</p>
         </li>
     );
   }

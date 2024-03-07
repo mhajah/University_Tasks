@@ -59,3 +59,42 @@
     color: gray;
 }
 
+.addForm > input,
+.searchForm > input {
+    background-color: white;
+    color: #222;
+    border: none;
+    border-bottom: 1px solid gray;
+    width: 200px;
+    height: 40px;
+    outline: none;
+}
+
+.addForm > button {
+    height: 40px;
+    margin-left: 20px;
+    background-color: rgb(66, 138, 66);
+    width: 70px;
+    border: none;
+}
+
+.searchForm > button {
+    height: 40px;
+    margin-left: 20px;
+    background-color: rgb(164, 61, 61);
+    width: 70px;
+    border: none;
+}
+
+.filterButton {
+    width: 295px;
+    background-color: rgb(153, 153, 32);
+    border: none;
+    height: 30px;
+    margin-top: 20px;
+}
+
+.separator {
+    background-color: black;
+    height: 1px;
+}

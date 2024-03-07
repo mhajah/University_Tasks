@@ -2,18 +2,18 @@ from pprint import pprint
 
 figures = ('W', 'R', 'B')
 
-def pos2d(s):
+def coords(s):
     column = ord(s[0]) - ord('a')
     row = ord(s[1]) - ord('1')
     return column, row
 
 def debug_print( wk, wt, bk, debug = False ):
 	board = [ [' ' for i in range(8)] for j in range(8) ] 
-	c,r = pos2d(wk)
+	c,r = coords(wk)
 	board[r][c] = figures[0]
-	c,r = pos2d(wt)
+	c,r = coords(wt)
 	board[r][c] = figures[1]
-	c,r = pos2d(bk)
+	c,r = coords(bk)
 	board[r][c] = figures[2]
 
 	colLabels = [[' '] +  [chr(j+97) for j in range(8)] ]

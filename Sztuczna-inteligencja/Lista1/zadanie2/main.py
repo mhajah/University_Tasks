@@ -13,7 +13,7 @@ def read_words(file_name : str = "words_for_ai1.txt"):
 def count_dp(text, lexicon=read_words()):
    
     text = "#" + text # indeksowanie od 1
-    orgin = [0] * (len(text) + 1)
+    origins = [0] * (len(text) + 1)
     dp    = [0] * (len(text) + 1)
 
     for i in range(1, len(text) + 1):
@@ -24,21 +24,17 @@ def count_dp(text, lexicon=read_words()):
                 temp_dp = dp[j-1] + (i+1-j)**2
                 if temp_dp > dp[i]:
                     dp[i] = temp_dp
-                    orgin[i] = j-1
+                    origins[i] = j-1
 
     temp = len(text)-1
     res = []
 
     while temp>0:
-        res.insert(0, text[ orgin[temp]+1:temp+1 ])
-        temp = orgin[temp]
+        res.insert(0, text[ origins[temp]+1:temp+1 ])
+        temp = origins[temp]
     return " ".join(res)
 
-
-
-if __name__ == "__main__":
-
-    lexicon = read_words()
-    with open("zad2_input.txt") as input_f, open("zad2_output.txt", "w") as out:
-        for line in input_f:
-            out.write( count_dp(line.strip(), lexicon) + "\n" )
+lexicon = read_words()
+with open("zad2_input.txt") as input_f, open("zad2_output.txt", "w") as out:
+    for line in input_f:
+        out.write( count_dp(line.strip(), lexicon) + "\n" )
