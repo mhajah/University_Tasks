@@ -1,0 +1,97 @@
+#!/bin/bash
+
+OPTSTRING=$(getopt -o cg:hvw -l capitalize,greeting:,help,version,world,color: -u -- "$@")
+
+if [ $? -ne 0 ] || [ $# -eq 0 ]; then
+    echo "Try '$0 --help' for more information."
+    exit 1
+fi
+
+# echo $@
+
+set -- ${OPTSTRING}
+
+# echo $@
+
+MAX_ARGS=1
+CAPITALIZE=false
+COLOR=auto
+GREETING="Hello,"
+IS_W_OPT=false
+
+for args in $@; do
+    case $args in
+        -c|--capitalize)
+            CAPITALIZE=true
+            shift;;
+
+        --color)
+            if [ -n "$2" ]; then
+                COLOR="$2"
+            fi
+            shift 2;;
+
+        -g|--greeting)
+            if [ -n "$2" ]; then
+                GREETING="$2"
+            fi
+            shift 2;;
+
+        -h|--help)
+            echo "Usage: $0 <options> <arguments>"
+            echo "Options: "
+            echo "-c, --capitalize wypisanie imienia bądź słowa world wielką literą;"
+            echo "-g text , --greeting=text zastąpienie słowa Hello podanym tekstem;"
+            echo "--color=[never | auto | always] kolorowanie imion (nigdy, tylko gdy standardowy strumień wyjściowy
+jest konsolą, zawsze), por. podobną opcję programu ls(1);"
+            echo "-h, --help wypisanie krótkiej ściągi;"
+            echo "-v, --version wypisanie nazwy i wersji programu oraz copyrightu"
+            echo "-w, --world wypisanie dodatkowo wiersza Hello, world!'"
+            exit 0;;
+
+        -v|--version)
+            echo "hwb v1"
+            shift;;
+
+        -w|--world)
+            IS_W_OPT=true
+            shift;;
+
+        --)
+            shift
+            break;;
+    esac
+done
+
+function hwb_print {
+    OUTPUT=$1
+
+    if [[ $CAPITALIZE == true ]]; then
+        OUTPUT=${OUTPUT^}
+    fi
+
+    if [[ $COLOR == auto ]]; then
+        if [ -t 1 ]; then
+            OUTPUT="\033[0;31m$OUTPUT"
+        fi
+    fi
+
+    if [[ $COLOR == always ]]; then
+        OUTPUT="\033[0;31m$OUTPUT"
+    fi
+
+    echo -e "${GREETING} ${OUTPUT}\033[0m!"
+}
+
+if [ $# -gt $MAX_ARGS ]; then
+    echo "invalid number of args, expected: ${MAX_ARGS}"
+    exit 1
+fi
+
+for arg in "$@"; do
+    hwb_print "$arg"
+done
+
+if $IS_W_OPT; then
+    hwb_print "world"
+fi
