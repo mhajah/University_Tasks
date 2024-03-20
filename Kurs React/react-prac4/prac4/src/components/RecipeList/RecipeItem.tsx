@@ -7,10 +7,17 @@ interface IProps {
 
 export default function RecipeItem( { recipe }:IProps ) {
 
+    const { removeRecipe } = useRecipe();
+    const { switchFav } = useRecipe();
+
     return (
-        <div className="recipeItem">
+        <div className={ recipe.isFav ? "recipeItem favoriteItem" : "recipeItem" }
+        onClick={()=> switchFav(recipe.id, recipe.isFav)}>
             <p> {recipe.title} </p>
             <p> {recipe.content} </p>
+            <button className="removeItem" onClick={()=> removeRecipe(recipe.id)}>
+                Delete
+            </button>
         </div>
     );
 }

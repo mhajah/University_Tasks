@@ -1,3 +1,4 @@
+import { Reducer } from "react";
 import { IRecipe } from "../types/Recipe.type";
 
 type RecipeAction = 
@@ -13,9 +14,16 @@ type RecipeAction =
         payload: {
             id: number;
         };
-    };
+      }
+    | {
+        type: "SWITCH_FAV";
+        payload: {
+            id: number;
+            isFav: boolean;
+        };
+      };
 
-export const recipeReducer = (state: IRecipe[], action: RecipeAction) => {
+export const recipeReducer: Reducer<any,any> = (state: IRecipe[], action: RecipeAction) => {
     console.log(action);
     switch(action.type) {
         case "ADD_RECIPE":
@@ -30,6 +38,18 @@ export const recipeReducer = (state: IRecipe[], action: RecipeAction) => {
             
         case "REMOVE_RECIPE":
             return state.filter((recipe) => recipe.id !== action.payload.id);
+
+        case "SWITCH_FAV":
+            return state.map((recipe) => {
+                if (recipe.id === action.payload.id) {
+                    return {
+                        ...recipe,
+                        isFav: !recipe.isFav // Zmiana wartości isFav na przeciwną
+                    };
+                } else {
+                    return recipe;
+                }
+            });
 
         default: 
             return state;

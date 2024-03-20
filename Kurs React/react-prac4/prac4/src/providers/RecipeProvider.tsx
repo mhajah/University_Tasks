@@ -7,17 +7,20 @@ export const RecipeContext = createContext<{
     recipes: IRecipe[];
     addRecipe: (title: string, content: string) => void;
     removeRecipe: (id: number) => void;
+    switchFav: (id: number, isFav: boolean) => void;
 }>({
     recipes: [],
     addRecipe: () => {},
-    removeRecipe: () => {}
+    removeRecipe: () => {},
+    switchFav: () => {},
 });
 
 const initialRecipes: IRecipe[] = [
-    { id: 1, title: "Twój przepis", content: "Skorzystaj z formularza, aby dodać swój ulubiony przepis. "}
+    { id: 1, title: "Test", content: "Testtt", isFav: false }
 ]
 
 const RecipeProvider = ({ children }: { children: React.ReactNode }) => {
+
     const [recipes, dispatch] = useReducer(recipeReducer, initialRecipes);
 
     function addRecipe(title: string, content: string) {
@@ -25,11 +28,15 @@ const RecipeProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     function removeRecipe(id: number) {
-        dispatch( { type: "REMOVE_RECIPE", payload: {id} } )
+        dispatch( { type: "REMOVE_RECIPE", payload: {id} } );
+    }
+
+    function switchFav(id: number, isFav: boolean) {
+        dispatch( { type: "SWITCH_FAV", payload: {id, isFav} } );
     }
 
     return (
-        <RecipeContext.Provider value={{ recipes, addRecipe, removeRecipe }}>
+        <RecipeContext.Provider value={{ recipes, addRecipe, removeRecipe, switchFav }}>
             {children}
         </RecipeContext.Provider>
     );
