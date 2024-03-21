@@ -6,6 +6,7 @@ export default function AddRecipeForm() {
     const [content, setContent] = useState("");
     const [error, setError] = useState(false);
     const { addRecipe } = useRecipe();
+    const { toggleShowdown } = useRecipe();
 
     return (
         <div
@@ -22,6 +23,7 @@ export default function AddRecipeForm() {
                 setError(false);
             }}
         >
+        <button onClick={ () => toggleShowdown() }>TOGGLE</button>
         <form>
             <input
             type="text"

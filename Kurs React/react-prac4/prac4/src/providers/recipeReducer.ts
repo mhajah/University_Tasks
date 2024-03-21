@@ -1,5 +1,6 @@
-import { Reducer } from "react";
+import { Reducer, useState } from "react";
 import { IRecipe } from "../types/Recipe.type";
+import useRecipe from "./useRecipe";
 
 type RecipeAction = 
     | {
@@ -21,10 +22,16 @@ type RecipeAction =
             id: number;
             isFav: boolean;
         };
+      }
+    | {
+        type: "SEARCH_RECIPES";
+        payload: {
+            search: string;
+        }
       };
 
 export const recipeReducer: Reducer<any,any> = (state: IRecipe[], action: RecipeAction) => {
-    console.log(action);
+
     switch(action.type) {
         case "ADD_RECIPE":
             return [
@@ -44,12 +51,15 @@ export const recipeReducer: Reducer<any,any> = (state: IRecipe[], action: Recipe
                 if (recipe.id === action.payload.id) {
                     return {
                         ...recipe,
-                        isFav: !recipe.isFav // Zmiana wartości isFav na przeciwną
+                        isFav: !recipe.isFav
                     };
                 } else {
                     return recipe;
                 }
             });
+
+        case "SEARCH_RECIPES":
+            return action.payload;
 
         default: 
             return state;
