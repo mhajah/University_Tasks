@@ -13,11 +13,11 @@ export default function RecipeItem( { recipe }:IProps ) {
     return (
         <div className={ recipe.isFav ? "recipeItem favoriteItem" : "recipeItem" }
         onClick={()=> switchFav(recipe.id, recipe.isFav)}>
-            <p> {recipe.title} </p>
-            <p> {recipe.content} </p>
+            <p className="recipeTitle"> {recipe.title} </p>
+            <p className="recipeContent"> {recipe.content} </p>
             <button className="removeItem" onClick={()=> removeRecipe(recipe.id)}>
                 Delete
             </button>
-        </div>
+        </div> 
     );
 }

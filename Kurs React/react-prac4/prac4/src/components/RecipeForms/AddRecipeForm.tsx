@@ -9,6 +9,7 @@ export default function AddRecipeForm() {
     const { toggleShowdown } = useRecipe();
 
     return (
+        
         <div
             className="AddRecipeForm"
             onSubmit={(e) => {
@@ -17,30 +18,32 @@ export default function AddRecipeForm() {
                     setError(true);
                     return;
                 }
-                addRecipe(title, content);
+                addRecipe(title, content, false);
                 setTitle("");
                 setContent("");
                 setError(false);
             }}
         >
-        <button onClick={ () => toggleShowdown() }>TOGGLE</button>
-        <form>
-            <input
-            type="text"
-            placeholder="Tytuł przepisu"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            />
-            <input
-            type="text"
-            placeholder="Treść przepisu"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            />
-            <button type="submit">Dodaj przepis</button>
-            {error && <p className="error">Error</p>}
-        </form>
-
+            <h3>Dodaj przepis</h3>
+            {error && <p className="error">Musisz tytuł i treść przepisu!!!</p>}
+            <div className="RecipeWrapper">  
+                <form>
+                    <input
+                    type="text"
+                    placeholder="Tytuł przepisu"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    />
+                    <input
+                    type="text"
+                    placeholder="Treść przepisu"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    />
+                    <button type="submit">Dodaj przepis</button>
+                </form>
+                <button onClick={ () => toggleShowdown() }>TOGGLE</button>
+            </div>
         </div>
     )
 }

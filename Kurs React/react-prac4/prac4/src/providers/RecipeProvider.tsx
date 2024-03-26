@@ -5,23 +5,19 @@ import { recipeReducer } from "./recipeReducer";
 export const RecipeContext = createContext<{
     recipes: IRecipe[];
     queryString: string;
-    addRecipe: (title: string, content: string) => void;
+    addRecipe: (title: string, content: string, isFav: boolean) => void;
     removeRecipe: (id: number) => void;
     switchFav: (id: number, isFav: boolean) => void;
     toggleShowdown: () => void;
     searchRecipes: (search:string) => void;
-}>({
-    recipes: [],
-    queryString: "",
-    addRecipe: () => {},
-    removeRecipe: () => {},
-    switchFav: () => {},
-    toggleShowdown: () => {},
-    searchRecipes: () => {},
-});
+}| undefined>(undefined);
 
 const initialRecipes: IRecipe[] = [
-    { id: 1, title: "Test", content: "Testtt", isFav: false }
+    { id: 1, title: "Płatki na mleku", content: "Aby wykonać pyszne płatki na mleku weź miskę, dodaj mleka, a następnie wsyp ulubione płatki", isFav: false },
+    { id: 2, title: "Kanapka z szynką", content: "Na ulubiony chleb połóż ulubioną szynkę. Opcjonalnie: posmaruj chleb masłem.", isFav: false },
+    { id: 3, title: "Płatki z jogurtem", content: "Aby wykonać pyszne płatki z jogurtem weź miskę, dodaj jogurt, a następnie wsyp ulubione płatki", isFav: false },
+    { id: 4, title: "Spaghetti napoli", content: "Ugotuj makaron zgodnie z instrukcją na opakowaniu. Dodaj passatę pomidorową i gotowe!", isFav: true },
+    { id: 5, title: "Sałatka z kurczakiem", content: "Usmaż kurczaka, podaj z sałatą lodową i ulubionym sosem.", isFav: false }
 ]
 
 const RecipeProvider = ({ children }: { children: React.ReactNode }) => {
@@ -30,8 +26,8 @@ const RecipeProvider = ({ children }: { children: React.ReactNode }) => {
     const [queryString, setQueryString] = useState("");
     const [showdown, setShowdown] = useState(false);    
 
-    function addRecipe(title: string, content: string) {
-        dispatch({ type: "ADD_RECIPE", payload: {title, content} });
+    function addRecipe(title: string, content: string, isFav: boolean) {
+        dispatch({ type: "ADD_RECIPE", payload: {title, content, isFav} });
     }
 
     function removeRecipe(id: number) {

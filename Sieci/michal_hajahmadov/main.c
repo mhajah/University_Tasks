@@ -54,6 +54,8 @@ int main(int argc, char *argv[]) {
     }
 
     socket_descriptor = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
+    printf("SFD: %d\n", socket_descriptor);
+    printf("PID: %d\n", getpid());
     if (socket_descriptor < 0) {
         fprintf(stderr, "Nie udalo sie utworzyc gniazda, socket error: %s\n", strerror(errno));
         exit(EXIT_FAILURE);

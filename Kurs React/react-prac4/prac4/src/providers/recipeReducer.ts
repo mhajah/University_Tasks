@@ -1,6 +1,5 @@
 import { Reducer, useState } from "react";
 import { IRecipe } from "../types/Recipe.type";
-import useRecipe from "./useRecipe";
 
 type RecipeAction = 
     | {
@@ -30,7 +29,7 @@ type RecipeAction =
         }
       };
 
-export const recipeReducer: Reducer<any,any> = (state: IRecipe[], action: RecipeAction) => {
+export const recipeReducer = (state: IRecipe[], action: RecipeAction) => {
 
     switch(action.type) {
         case "ADD_RECIPE":
@@ -58,8 +57,6 @@ export const recipeReducer: Reducer<any,any> = (state: IRecipe[], action: Recipe
                 }
             });
 
-        case "SEARCH_RECIPES":
-            return action.payload;
 
         default: 
             return state;

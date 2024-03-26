@@ -25,7 +25,6 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -53,6 +52,62 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+.searchForm {
+  margin-bottom: 80px;
+}
+
+.searchForm input {
+  height: 30px;
+  margin-right: 10px;
+}
+
+
+.recipeItem {
+  border: 1px solid blue;
+  min-width: 200px;
+  margin: 5px;
+  max-width: 400px;
+  padding: 30px;
+  overflow-wrap: break-word;
+  background-color: #fff;
+  color: #222; 
+}
+
+
+.favoriteItem {
+  background-color: gold;
+  color: #111;
+}
+
+.recipeList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.recipeTitle {
+  font-size: 24px;
+  font-weight: 900;
+  text-decoration: underline;
+}
+
+.RecipeWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.RecipeWrapper input {
+  height: 30px;
+  margin-right: 10px;
+}
+
+.error {
+  color: rgb(253, 78, 78);
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {
