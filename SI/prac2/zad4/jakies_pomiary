@@ -1,0 +1,23 @@
+# def heurystyka(positions, moves):
+#     distances = (dist[pos] for pos in positions)
+#     return max(distances) * N + moves
+
+N = 1
+For passing cases total num_moves: 499
+For passing cases total time: 34.84846305847168
+
+N = 1.2
+For passing cases total num_moves: 252
+For passing cases total time: 15.150147199630737
+
+N = 2
+For passing cases total num_moves: 52
+For passing cases total time: 0.11754250526428223
+
+N = 5
+For passing cases total num_moves: 40
+For passing cases total time: 0.0702970027923584
+
+N = 40
+For passing cases total num_moves: 40
+For passing cases total time: 0.07514214515686035
