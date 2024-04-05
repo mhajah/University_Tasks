@@ -1,0 +1,72 @@
+@import "../../../cards";
+
+.contact {
+    margin-bottom: 40px;
+
+
+    .contactForm {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+
+        :global(.light-theme) & {
+            background-color: $color-contact-form-light;
+            color: $color-text-light;
+            border: 1px solid $border-color-light;
+        }
+
+        :global(.dark-theme) & {
+            background-color: $color-contact-form-dark;
+            border: 1px solid $border-color-dark;
+        }
+
+        .formGroup {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 5px;
+            :global(.light-theme) & {
+                background-color: $color-contact-input-light;
+                color: $color-text-light;
+                border: 1px solid $border-input-light;
+            }
+            :global(.dark-theme) & {
+                background-color: $color-contact-input-dark;
+                border: 1px solid $border-input-dark;
+                color: $color-text-dark;
+            }
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            :global(.light-theme) & {
+                background-color: $color-button-background-light;
+                color: $color-text-dark;
+            }
+
+            :global(.light-theme) &:hover {
+                background-color: $color-button-background-hover-light;
+            }
+        }
+    }
+}
+

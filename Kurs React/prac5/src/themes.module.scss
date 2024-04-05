@@ -1,0 +1,140 @@
+/* Define variables for repeated values */
+$color-text-light: #333;
+$color-text-dark: #fff;
+$color-background-light: #fff;
+$color-background-dark: #111;
+$color-link-light: #333;
+$color-link-dark: #fff;
+$color-button-background-light: #4caf50;
+$color-button-background-hover-light: #45a049;
+$color-button-background-dark: $color-button-background-light;
+$color-button-background-hover-dark: $color-button-background-hover-light;
+$color-content-card-light: #eee;
+$color-content-card-dark: #333;
+$color-section-even-light: #f5f5f5;
+$color-section-even-dark: #444;
+$color-navbar-light: #f0f0f0;
+$color-navbar-dark: #222;
+$color-contact-form-light: #f9f9f9;
+$color-contact-form-dark: #333;
+$color-contact-input-light: #fff;
+$color-contact-input-dark: #444;
+$border-color-light: #ddd;
+$border-color-dark: #555;
+$border-input-light: #ccc;
+$border-input-dark: #666;
+$theme-toggle-background-light: #333;
+$theme-toggle-background-hover-light: #555;
+$theme-toggle-background-dark: #ddd;
+$theme-toggle-background-hover-dark: #ccc;
+
+/* Base styles for light theme */
+.lightTheme {
+  background-color: $color-background-light;
+  color: $color-text-light;
+
+  .navbar {
+    background-color: $color-navbar-light;
+
+    a {
+      color: $color-link-light;
+    }
+  }
+
+  .theme-toggle-button {
+    background-color: $theme-toggle-background-light;
+    color: $color-text-dark;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $theme-toggle-background-hover-light;
+    }
+  }
+
+  .content-card { background-color: $color-content-card-light; }
+
+  .team-member,
+  .section:nth-child(even) {
+    background-color: $color-section-even-light;
+    color: $color-text-light;
+  }
+
+  .blog-post {
+    background-color: $color-content-card-light;
+    color: $color-text-light;
+
+    button {
+      background-color: $color-button-background-light;
+      color: $color-text-dark;
+
+      &:hover {
+        background-color: $color-button-background-hover-light;
+      }
+    }
+  }
+
+  .contact-form {
+    background-color: $color-contact-form-light;
+    color: $color-text-light;
+    border: 1px solid $border-color-light;
+  }
+
+  .contact {
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      background-color: $color-contact-input-light;
+      color: $color-text-light;
+      border: 1px solid $border-input-light;
+    }
+
+    button {
+      background-color: $color-button-background-light;
+      color: $color-text-dark;
+
+      &:hover {
+        background-color: $color-button-background-hover-light;
+      }
+    }
+  }
+}
+
+/* Base styles for dark theme */
+.darkTheme {
+  background-color: $color-background-dark;
+  color: $color-text-dark;
+
+  // Nesting similar to .light-theme for brevity
+  @extend .lightTheme; // Using extend to inherit and then override necessary styles
+
+  .navbar {
+    background-color: $color-navbar-dark;
+    a { color: $color-link-dark; }
+  }
+
+  .theme-toggle-button {
+    background-color: $theme-toggle-background-dark;
+    color: $color-text-light;
+
+    &:hover {
+      background-color: $theme-toggle-background-hover-dark;
+    }
+  }
+
+  .content-card { background-color: $color-content-card-dark; }
+  .team-member, .section:nth-child(even) { background-color: $color-section-even-dark; }
+  .contact-form {
+    background-color: $color-contact-form-dark;
+    border: 1px solid $border-color-dark;
+  }
+  .contact {
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      background-color: $color-contact-input-dark;
+      border: 1px solid $border-input-dark;
+    }
+  }
+}

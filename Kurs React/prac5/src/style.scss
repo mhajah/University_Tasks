@@ -1,0 +1,95 @@
+@import "cards";
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.portfolio {
+    margin: 0 auto;
+}
+
+.contentCard {
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.section {
+    padding: 20px 0;
+
+    &-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    h2 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+
+}
+
+.section-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+.theme-toggle-button {
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+/* Base styles for light theme */
+.light-theme {
+  background-color: $color-background-light;
+  color: $color-text-light;
+
+  .theme-toggle-button {
+    background-color: $theme-toggle-background-light;
+    color: $color-text-dark;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $theme-toggle-background-hover-light;
+    }
+  }
+
+  .content-card { background-color: $color-content-card-light; }
+
+  .team-member,
+  .section:nth-child(even) {
+    background-color: $color-section-even-light;
+    color: $color-text-light;
+  }
+
+}
+
+.dark-theme {
+  background-color: $color-background-dark;
+  color: $color-text-dark;
+
+  @extend .light-theme;
+
+  .theme-toggle-button {  background-color: $color-background-dark;
+    color: $color-text-dark;
+    background-color: $theme-toggle-background-dark;
+    color: $color-text-light;
+
+    &:hover {
+      background-color: $theme-toggle-background-hover-dark;
+    }
+  }
+
+  .content-card { background-color: $color-content-card-dark; }
+  .team-member, .section:nth-child(even) { background-color: $color-section-even-dark; }
+  .contact-form {
+    background-color: $color-contact-form-dark;
+    border: 1px solid $border-color-dark;
+  }
+}

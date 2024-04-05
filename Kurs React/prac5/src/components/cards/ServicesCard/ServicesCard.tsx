@@ -1,3 +1,4 @@
+import classes from "./styles.module.scss";
 
 interface IProps {
     services: {
@@ -7,9 +8,9 @@ interface IProps {
     }[]
 }
 
-export default function TeamCard({ services }: IProps) {
+export default function Services({ services }: IProps) {
     return (
-        <section id="services" className="section services">
+        <section id="services" className={`section ${classes.services}`}>
           <div className="section-content">
             <h2>Our Services</h2>
             <ul>

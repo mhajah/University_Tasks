@@ -1,19 +1,5 @@
-@use '../../../cards';
+@import "../../../cards";
 
-.section {
-    padding: 20px 0;
-
-    h2 {
-        font-size: 2.5em;
-        margin-bottom: 20px;
-        display: inline-block;
-    }
-}
-
-.sectionContent {
-    max-width: 800px;
-    margin: 0 auto;
-}
 
 .blogPosts {
     display: grid;
@@ -22,9 +8,21 @@
 }
 
 .blogPost {
+
     border-radius: 10px;
     padding: 20px;
     text-align: left;
+
+
+    :global(.light-theme) & {
+        background-color: $color-content-card-light;
+        color: $color-text-light;
+    }
+
+    :global(.dark-theme) & {
+        background-color: $color-background-dark;
+        color: $color-text-dark;
+    }
 
     h3 {
         margin-bottom: 10px;
@@ -42,15 +40,25 @@
         transition: background-color 0.3s ease;
 
         &:hover {
-            background-color: cards.$post-button-hover-color;
+            background-color: $post-button-hover-color;
+        }
+
+        :global(.light-theme) & {
+            background-color: $color-button-background-light;
+            color: $color-text-dark;
+        }
+
+        :global(.light-theme) &:hover {
+            background-color: $color-button-background-hover-light;
         }
 
 
     }
 }
 
+
 .lightTheme {
-    button {
+    buttbloon {
         background-color: #4caf50;
         color: #fff;
     }

@@ -11,8 +11,8 @@ interface IProps {
 
 export default function TeamCard({blogPosts}: IProps) {
     return (
-        <section id="blog" className={classes.section}>
-          <div className={classes.sectionContent}>
+        <section id="blog" className="section">
+          <div className="section-content">
             <h2>Latest Blog Posts</h2>
             <div className={classes.blogPosts}>
               {blogPosts.map((post) => (

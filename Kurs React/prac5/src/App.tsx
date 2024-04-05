@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import "./styles.css";
+import "./style.scss";
 
 import TeamCard from "./components/cards/TeamCard/TeamCard";
 import ContactCard from "./components/cards/ContactCard/ContactCard";
 import BlogCard from "./components/cards/BlogCard/BlogCard";
 import ServicesCard from "./components/cards/ServicesCard/ServicesCard";
 import AboutCard from "./components/cards/AboutCard/AboutCard";
+import Header from "./components/Header/Header";
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 
 const companyData = {
   name: "Acme Corporation",
@@ -110,24 +113,9 @@ const App = () => {
 
   return (
     <div className={`portfolio ${darkMode ? "dark-theme" : "light-theme"}`}>
-      <div className="navbar">
-        <a href="#header">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#team">Team</a>
-        <a href="#blog">Blog</a>
-        <a href="#contact">Contact</a>
-        <button onClick={toggleTheme} className="theme-toggle-button">
-          {darkMode ? "Light Mode" : "Dark Mode"}
-        </button>
-      </div>
+      <Navbar toggleTheme={toggleTheme} darkMode={darkMode} />
 
-      <header id="header" className="header">
-        <div className="header-content">
-          <h1>{companyData.name}</h1>
-          <p>{companyData.slogan}</p>
-        </div>
-      </header>
+      <Header name={companyData.name} slogan={companyData.slogan} />
 
       <div className="content-card">
 
@@ -135,20 +123,15 @@ const App = () => {
 
         <ServicesCard services={companyData.services} />
 
-        <TeamCard teamMembers={companyData.teamMembers} />
+        <TeamCard teamMembers={companyData.teamMembers} theme={darkMode} />
 
         <BlogCard blogPosts={companyData.blogPosts} />
 
         <ContactCard handleSubmit={handleSubmit} />
         
       </div>
-      <footer className="footer">
-        <div className="footer-content">
-          <p>
-            &copy; {new Date().getFullYear()} {companyData.name}
-          </p>
-        </div>
-      </footer>
+
+      <Footer name={companyData.name} />
     </div>
   );
 };
