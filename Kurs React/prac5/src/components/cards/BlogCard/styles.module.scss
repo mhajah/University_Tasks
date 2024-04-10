@@ -48,7 +48,14 @@
             color: $color-text-dark;
         }
 
-        :global(.light-theme) &:hover {
+        
+        :global(.dark-theme) & {
+            background-color: $color-button-background-light;
+            color: $color-text-dark;
+        }
+        
+        :global(.light-theme) &:hover,
+        :global(.dark-theme) &:hover {
             background-color: $color-button-background-hover-light;
         }
 
