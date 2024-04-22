@@ -60,6 +60,7 @@ const AddProductDialog: React.FC<AddProductDialogProps> = ({ isOpen, handleClose
                     onChange={handleChange}
                     error={!!errors.name}
                     helperText={errors.name}
+                    required
                 />
                 <TextField
                     margin="dense"
@@ -72,6 +73,7 @@ const AddProductDialog: React.FC<AddProductDialogProps> = ({ isOpen, handleClose
                     onChange={handleChange}
                     error={!!errors.type}
                     helperText={errors.type}
+                    required
                 />
                 <TextField
                     margin="dense"
@@ -84,6 +86,7 @@ const AddProductDialog: React.FC<AddProductDialogProps> = ({ isOpen, handleClose
                     onChange={handleChange}
                     error={!!errors.price}
                     helperText={errors.price}
+                    required
                 />
                 <TextField
                     margin="dense"
@@ -96,6 +99,7 @@ const AddProductDialog: React.FC<AddProductDialogProps> = ({ isOpen, handleClose
                     onChange={handleChange}
                     error={!!errors.noitems}
                     helperText={errors.noitems}
+                    required
                 />
             </DialogContent>
             <DialogActions>

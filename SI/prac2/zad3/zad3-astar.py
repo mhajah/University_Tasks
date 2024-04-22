@@ -9,12 +9,15 @@ X = [-1,  0, 1, 0]
 Y = [0, -1,  0, 1]
 L = ["U", "L", "D", "R"]
 
+# czy komandosi sa na miejscach docelowych
 def isWin(Fin, Kom):
     for k in Kom:
         if k not in Fin:
              return False
     return True
 
+# bfs z kazdego pola niebedacego sciana,
+# aby znalezc najkrotsza sciezke do najblizszego celu
 def shortest_paths(pos):
     q = deque()
     dist[pos] = 1e9
@@ -38,17 +41,23 @@ def shortest_paths(pos):
 
 def heurystyka(positions, moves):
     distances = (dist[pos] for pos in positions)
-    return max(distances) + moves
+    return max(distances) * 1.05 + moves
 
 def Astar(K, M):
     Q = []
+    # poczatkowy stan + koszt "heurystyczny"
     heapq.heappush(Q, (heurystyka(K, 0), K, M))
+
+    # dodajemy stan poczatkowy, zeby nie powtarzac
     allpos.add(tuple(K))
 
     while len(Q) > 0:
+        # najnizszy koszt heurystyczny
         pos = heapq.heappop(Q)
         K = pos[1]
         moves = pos[2]
+
+        # jak biezacy stan git, to ok
         if isWin(punkty_docelowe, K):
             return moves
 

@@ -1,0 +1,9 @@
+mount /dev/sda1 /mnt
+chroot /mnt
+grub-install /dev/sda
+update-grub
+
+
+mount --bind /dev /mnt/dev
+/sys
+/proc

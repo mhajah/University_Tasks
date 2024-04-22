@@ -1,106 +1,91 @@
 from collections import deque
 import heapq
-import time
 
-board = []
-dist = {}
-allpos = set()
-
-X = [-1,  0, 1, 0]
-Y = [0, -1,  0, 1]
+# Define global movement and direction variables
+X = [-1, 0, 1, 0]
+Y = [0, -1, 0, 1]
 L = ["U", "L", "D", "R"]
 
-def isWin(Fin, Kom):
-    for k in Kom:
-        if k not in Fin:
-             return False
+# Helper function to check if all targets are covered
+def is_win(fin, kom):
+    for k in kom:
+        if k not in fin:
+            return False
     return True
 
-def shortest_paths(pos):
-    q = deque()
-    dist[pos] = 1e9
-    vis = {}
-    vis[pos] = True
-    q.append((pos, 0))
-
-    while len(q) > 0:
-        position = q.popleft()
-        P = position[0]
-        D = position[1]
-
-        if P in punkty_docelowe:
-            dist[pos] = min(dist[pos], D)
+# Pre-compute the shortest distance from every point to the nearest goal
+def shortest_paths(board, punkty_docelowe):
+    dist = {}
+    for goal in punkty_docelowe:
+        q = deque([(goal, 0)])
+        visited = {goal}
         
-        for i in range(4):
-            if board[P[0] + X[i]][P[1] + Y[i]] != "#" and (P[0] + X[i], P[1] + Y[i]) not in vis:
-                  vis[(P[0] + X[i], P[1] + Y[i])] = True
-                  q.append(((P[0] + X[i], P[1] + Y[i]), D + 1))
+        while q:
+            current, distance = q.popleft()
+            dist[current] = min(dist.get(current, float('inf')), distance)
+            for dx, dy in zip(X, Y):
+                next_pos = (current[0] + dx, current[1] + dy)
+                if 0 <= next_pos[0] < len(board) and 0 <= next_pos[1] < len(board[0]) and board[next_pos[0]][next_pos[1]] != '#' and next_pos not in visited:
+                    visited.add(next_pos)
+                    q.append((next_pos, distance + 1))
+    return dist
 
+# Heuristic function for the A* search
+def heuristic(dist, positions, moves):
+    return max(dist[pos] for pos in positions if pos in dist) * 1.05 + moves
 
-def heurystyka(positions, moves):
-    distances = (dist[pos] for pos in positions)
-    return max(distances) * 1.2 + moves
-
-def Astar(K, M):
+# A* search algorithm
+def astar(board, start_points, dist, punkty_docelowe):
     Q = []
-    heapq.heappush(Q, (heurystyka(K, 0), K, M))
-    allpos.add(tuple(K))
+    heapq.heappush(Q, (heuristic(dist, start_points, 0), start_points, ""))
+    allpos = set([tuple(start_points)])
 
-    while len(Q) > 0:
-        pos = heapq.heappop(Q)
-        K = pos[1]
-        moves = pos[2]
-        if isWin(punkty_docelowe, K):
+    while Q:
+        _, K, moves = heapq.heappop(Q)
+        if is_win(punkty_docelowe, K):
             return moves
 
         for i in range(4):
             temp_pos = []
             for k in K:
-                temp = list(k)
-                if board[temp[0] + X[i]][temp[1] + Y[i]] != "#":
-                    temp[0] = temp[0] + X[i]
-                    temp[1] = temp[1] + Y[i]
-                temp_pos.append(tuple(temp))
-            
-            temp_pos = sorted(list(set(temp_pos))) 
+                if board[k[0] + X[i]][k[1] + Y[i]] != "#":
+                    temp_pos.append((k[0] + X[i], k[1] + Y[i]))
+                else:
+                    temp_pos.append(k)
+
+            temp_pos = sorted(set(temp_pos)) 
             hasz = tuple(temp_pos)
             if hasz not in allpos:
                 allpos.add(hasz)
-                heapq.heappush(Q, (heurystyka(temp_pos, len(moves) + 1), temp_pos, moves + L[i]))
+                heapq.heappush(Q, (heuristic(dist, temp_pos, len(moves) + 1), temp_pos, moves + L[i]))
+    return ""
 
+# Load and preprocess the board
+def load_board(filepath):
+    board = []
+    punkty_startowe, punkty_docelowe = [], set()
+    with open(filepath) as f:
+        for line in f:
+            board.append(list(line.strip()))
 
-# Wczytywanie planszy
-with open('zad_input.txt') as f:
-    for line in f:
-        board.append(list(line.strip()))
+    for i, row in enumerate(board):
+        for j, cell in enumerate(row):
+            if cell in 'GB':
+                punkty_docelowe.add((i, j))
+            if cell in 'SB':
+                punkty_startowe.append((i, j))
+            if cell != '#':
+                board[i][j] = '.'
+    return board, punkty_startowe, punkty_docelowe
 
-bHeight, bWidth = len(board)-1, len(board[0])  
+# Main execution function
+def solve(filepath):
+    board, punkty_startowe, punkty_docelowe = load_board(filepath)
+    dist = shortest_paths(board, punkty_docelowe)
+    solution = astar(board, punkty_startowe, dist, punkty_docelowe)
+    
+    with open("zad_output.txt", "w") as output:
+        output.write(solution)
 
-punkty_startowe, punkty_docelowe = [], set()
-# Rodzaje pol i ich pozycje
-for i in range(bHeight):
-    for j in range(bWidth):
-        if board[i][j] == 'G':
-            punkty_docelowe.add((i,j))
-        if board[i][j] == 'S':
-            punkty_startowe.append((i, j))
-        if board[i][j] == 'B':
-            punkty_docelowe.add((i,j))
-            punkty_startowe.append((i, j))
-        if board[i][j] != '#':
-            board[i][j] = '.'
-
-# Znajdź najkrótsze ścieżki
-for i in range(bHeight):
-    for j in range(bWidth):
-        if board[i][j] != "#":
-            shortest_paths((i, j))
-
-
-M = Astar(punkty_startowe, "")
-ans = ""
-for i in M:
-    ans += i
-output = open("zad_output.txt", "w")
-output.write(ans)
-output.close()
+# Run the solver with the input file
+solve('zad_input.txt')

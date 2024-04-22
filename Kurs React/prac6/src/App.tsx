@@ -13,6 +13,7 @@ const theme = createTheme({
           styleOverrides: {
               root: {
                   color: 'white',
+
               },
               columnHeaderTitle: {
                   fontWeight: 'bold',
@@ -21,9 +22,12 @@ const theme = createTheme({
               footerContainer: {
                   backgroundColor: "white",
               },
-              baseCheckbox: {
-                  backgroundColor: "red",
-              }
+
+              row: {
+                  backgroundColor: "lightgrey",
+                  color: "black"
+              },
+
               
           },
       },

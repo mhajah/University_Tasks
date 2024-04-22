@@ -1,0 +1,11 @@
+h - wyświetla pomoc, pokazując skróty klawiszowe i podstawowe opcje.
+k - zabija proces
+f - wchodzi w tryb wyboru pól, które mają być wyświetlane.
+o - pozwala na określenie kolejności sortowania.
+r - zmienia priorytet wybranego procesu (renice).
+s - zmienia częstotliwość odświeżania.
+z - przełącza kolorowanie.
+c - przełącza wyświetlanie pełnej ścieżki procesu i jego argumentów.
+m - przełącza widok pamięci.
+t - przełącza wyświetlanie informacji o CPU.
+1 - wyświetla informacje o poszczególnych rdzeniach CPU zamiast podsumowania.

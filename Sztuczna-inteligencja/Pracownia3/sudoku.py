@@ -16,10 +16,12 @@ def get_column(j):
 def get_raw(i):
     return [V(i,j) for j in range(9)] 
 
-def get_box(n):
-    y, x = (3*(n//3), 3*(n%3))
-    cells = [(i, j) for i in range(y, y+3) for j in range(x, x+3)] 
-    return [V(i,j) for i,j in cells]
+# zmienne reprezentujace n-ty blok 3x3 w sudoku
+# - które komórki naleza do n-tego bloku sudoku
+def get_sqrts(n):
+    y, x = (3 * ( n // 3 ), 3 * ( n % 3))
+    cells = [( i, j ) for i in range( y, y+3 ) for j in range( x, x+3 )] 
+    return [V( i,j ) for i, j in cells]
                         
 def horizontal():   
     return [all_different(get_raw(i)) for i in range(9)]
@@ -27,8 +29,9 @@ def horizontal():
 def vertical():
     return [all_different(get_column(j)) for j in range(9)]
 
-def box():
-    return [all_different(get_box(n)) for n in range(9)]
+# generowanie wiezow
+def sqrts():
+    return [all_different(get_sqrts(n)) for n in range(9)]
 
 def print_constraints(Cs, indent, d):
     position = indent
@@ -49,7 +52,7 @@ def sudoku(assigments):
     print ('solve([' + ', '.join(variables) + ']) :- ')
     
     
-    cs = domains(variables) + vertical() + horizontal() + box() #TODO: too weak contraints, add something!
+    cs = domains(variables) + vertical() + horizontal() + sqrts() #TODO: too weak contraints, add something!
     for i,j,val in assigments:
         cs.append( '%s #= %d' % (V(i,j), val) )
     

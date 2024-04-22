@@ -13,11 +13,16 @@ export default function ProductsTable() {
                     columns={columns}
                     initialState={{
                         pagination: {
-                            paginationModel: { page: 0, pageSize: 5 },
+                            paginationModel: { page: 0, pageSize: 6 },
                         },
                     }}
-                    pageSizeOptions={[5, 10, 20]}
+                    pageSizeOptions={[6, 10, 20]}
                     checkboxSelection={false}
+                    sx={{
+                        "& .MuiDataGrid-row:hover": {
+                          backgroundColor: "skyblue"
+                        }
+                    }}
                 />
             </div>
     );

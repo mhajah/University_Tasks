@@ -21,7 +21,6 @@ class Nonogram:
         self.col_domains = col_domains
 
     # Generuje mozliwe ustawienia dla danej sekwencji
-    @staticmethod
     def calculate_domain(config, size):
         domain = []
         if sum(config) + len(config) - 1 > size:
@@ -48,6 +47,7 @@ class Nonogram:
                         domain.append(pref + '.' + suf)
         return domain
     
+    #przycinanie dziedziny danej zmiennej jesli to konieczne
     def revise(self, i, j, relation):
         # Sprawdzam typ relacji (czy wiersz-kolumna, czy kolumna-wiersz)
         match relation:
@@ -88,7 +88,7 @@ class Nonogram:
         while not q.empty():
             (i, j, relation) = q.get()
             # revise probuje 'przyciac' dziedziny tak, zeby byly zgodne z danym wiezem
-            if self.revise(i, j, relation): # zalozenie, ze da sie rozwiazac obrazek
+            if self.revise(i, j, relation): 
                 # jesli revise zwroci informacje, ze dziedzina zostala zmieniona, 
                 # to wtedy dodajemy wszystkie inne wiezy zwiazane z ta dziedzina ponownie do kolejki
                 # (dzieki temu jakiekolwiek zmiany w jednej dziedzinie, zostana uwzglednione przez inne)

@@ -36,8 +36,6 @@ const ProductsProvider = ({ children }: { children: React.ReactNode }) => {
         noitems: 0,
     });
 
- 
-
     const handleDelete = useCallback((id: number) => {
         console.log('Usuwanie produktu o id:', id);
         setRows((prevRows) => prevRows.filter(row => row.id !== id));
@@ -73,7 +71,7 @@ const ProductsProvider = ({ children }: { children: React.ReactNode }) => {
           width: 50, 
           sortable: false, 
           renderCell: (params) => (
-            <IconButton onClick={() => handleDelete(params.id)}>
+            <IconButton onClick={() => handleDelete(+params.id)}>
               <DeleteIcon style={{color: "red"}}/>
             </IconButton>
           ),

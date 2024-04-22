@@ -40,6 +40,12 @@ def solve_nonogram(horizontal, vertical):
         pattern = generate_pattern(col_config, height)
         col_patterns.append(pattern)
 
+    # iterujemy sie po wierszach probujac dopasowac wzory do kolumn
+    # jesli w ktoryms momencie nie mozna znalezc pasujacego wzoru,
+    # to alg. cofa sie do poprzedniego wiersza
+    
+    # ...do momentu az znajdziemy pasujacy wzor dla kazdego wiersza
+
     idy = 0 # obecnie rozważany wiersz
     backtrack = [(-1, []) for _ in range(height + 1)]
     solution = ''

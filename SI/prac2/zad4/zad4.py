@@ -39,7 +39,7 @@ def shortest_paths(pos):
 
 def heurystyka(positions, moves):
     distances = (dist[pos] for pos in positions)
-    return max(distances) * 20 + moves
+    return max(distances) * 1.3 + moves
 
 def Astar(K, M):
     Q = []

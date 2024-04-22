@@ -8,24 +8,33 @@ X = [-1,  0, 1, 0]
 Y = [0, -1,  0, 1]
 L = ["U", "L", "D", "R"]
 
+# czy pole nie jest sciana
 def isLegalMove(x, y):
     return board[x][y] != "#"
     
+# czy wszyscy komandosi znajduja sie na poz. docelowych
 def isWin(Fin, Kom):
     for k in Kom:
         if k not in Fin:
              return False
     return True
 
+# K - poczatkowa lista komandosow na planszy
+# F - pozycje docelowe
+# M - ruchy do tej pory
 def bfs(K, F, M):
-    q = deque()
+    q = deque() # stany przeszukiwania
     pos = [K, M]
     q.append(pos)
     K = sorted(K)
+    # odwiedzone pozycje
     allpos.add(tuple(K))
     
     while len(q) != 0:
+        # zdejmujemy pierwszy element z kolejki
         position = q.popleft()
+
+        # czy git
         if isWin(F, position[0]):
             return position[1]
 
@@ -72,14 +81,16 @@ for i in range(bHeight):
 
 
 # Zmniejszanie niepewności
-            
+# tj. "optymalizacja" polegajaca na testowaniu roznych kombinacji
+# poczatkowych sekwencji ruchow             
+
 # możliwe kombinacje ruchów: 4*3*2*1=24
 all_sequences = list(itertools.permutations(L))
 best_seq = ''
 minimal_moves = 1e9
 best_positions = []
 for seq in all_sequences:
-    N = 19
+    N = 20
     act_seq = seq[0] * N + seq[1] * N + seq[2] * N + seq[3] * N
     komandos = punkty_startowe.copy()
     for i in range(4):
@@ -108,8 +119,7 @@ for seq in all_sequences:
         best_seq = act_seq
         best_positions = komandos.copy()
 
-## binsearch
-test = N*"L" + 6*"U" + "RUUL" + "RR" + "U"*5
+test = N*"L" + 4*"U" + "RUUL" + "RR" + "U"*5
 temp_pos = []
 for k in best_positions:
     temp = list(k)

@@ -1,0 +1,20 @@
+** PS **
+
+ps - procesy zwiazane z danym terminalem
+
+ps aux - wszystkie procesy w systemie
+
+ps -u <user> - procesy uzytkownika
+
+ps axjf - drzewo zaleznosci
+
+** PSTREE **
+
+pstree -p 
+pokazuje PIDy procesow
+
+pstree -p <id>
+pokazuje procesy zalezne od danego procesu
+
+pstree <user>
+danego usera
