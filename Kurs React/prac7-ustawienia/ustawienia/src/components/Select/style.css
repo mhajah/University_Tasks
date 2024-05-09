@@ -1,0 +1,81 @@
+
+.SelectRoot {
+  margin-bottom: 30px;
+  width: 150px;
+}
+
+.SelectTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s ease;
+  color: #555;
+  width: 100%;
+}
+
+.SelectTrigger:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.SelectContent {
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 4px 0;
+}
+
+.SelectItem {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: #555;
+}
+
+.SelectItem:hover {
+  background-color: #f0f0f0;
+}
+
+.SelectLabel {
+  padding: 4px 12px;
+  font-weight: bold;
+  color: #555;
+  background-color: #eee;
+}
+
+.SelectScrollButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.SelectSeparator {
+  height: 1px;
+  background-color: #ccc;
+  margin: 4px 0;
+}
+
+.SelectViewport {
+  padding: 4px;
+}
+
+.SelectArrow {
+  position: absolute;
+  right: 12px;
+}
+
+.SelectIcon {
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}

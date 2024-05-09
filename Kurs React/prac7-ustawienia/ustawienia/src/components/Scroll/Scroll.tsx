@@ -1,21 +1,25 @@
 import React from 'react';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import * as Tabs from '@radix-ui/react-tabs';
-import './styles.css';
+import './style.css';
 
-const TAGS = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
+interface IProps {
+  val: string,
+  content: string
+}
 
-const ScrollAreaDemo = () => (
+interface ScrollAreaProps {
+  headers: IProps[];  
+}
+
+const ScrollAreaDemo = ({headers}: ScrollAreaProps ) => (
   <ScrollArea.Root className="ScrollAreaRoot">
     <ScrollArea.Viewport className="ScrollAreaViewport">
-      <div style={{ padding: '15px 20px' }}>
-        <div className="Text">Tags</div>
-        {TAGS.map((tag) => (
-          <Tabs.Trigger className="Tag" value={tag}>
-            {tag}
+    {headers.map((header) => (
+          <Tabs.Trigger className="TabsTrigger" value={header.val}>
+            {header.content}
           </Tabs.Trigger>
         ))}
-      </div>
     </ScrollArea.Viewport>
     <ScrollArea.Scrollbar className="ScrollAreaScrollbar" orientation="vertical">
       <ScrollArea.Thumb className="ScrollAreaThumb" />

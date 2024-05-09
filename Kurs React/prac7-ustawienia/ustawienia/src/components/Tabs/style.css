@@ -1,5 +1,5 @@
 @import '@radix-ui/colors/black-alpha.css';
-@import '@radix-ui/colors/green.css';
+@import '@radix-ui/colors/blue.css';
 @import '@radix-ui/colors/mauve.css';
 @import '@radix-ui/colors/violet.css';
 
@@ -8,12 +8,13 @@ button,
 fieldset,
 input {
   all: unset;
+
 }
 
 .TabsRoot {
   display: flex;
   flex-direction: row;
-  width: 500px;
+  width: 600px;
 }
 
 .TabsList {
@@ -34,6 +35,11 @@ input {
   font-size: 15px;
   color: var(--mauve-11);
   user-select: none;
+  transition: 0.4s ease-in-out;
+}
+
+.TabsTrigger:hover {
+  color: var(--blue-11);
 }
 
 .TabsContent {
@@ -63,12 +69,13 @@ input {
   justify-content: flex-start;
 }
 
-.Label {
+.LabelTabs {
   font-size: 13px;
   line-height: 1;
-  margin-bottom: 10px;
-  color: var(--violet-12);
+  margin-bottom: 15px;
+  color: var(--blue-12);
   display: block;
+  padding: 0;
 }
 
 .Input {
@@ -77,12 +84,16 @@ input {
   padding: 0 10px;
   font-size: 15px;
   line-height: 1;
-  color: var(--violet-11);
-  box-shadow: 0 0 0 1px var(--violet-7);
+  color: var(--blue-11);
+  box-shadow: 0 0 0 1px var(--blue-7);
   height: 35px;
 }
 .Input:focus {
-  box-shadow: 0 0 0 2px var(--violet-8);
+  box-shadow: 0 0 0 2px var(--blue-8);
+}
+
+Select {
+  margin-bottom: 50px;;
 }
 
 .Button {
@@ -96,13 +107,13 @@ input {
   font-weight: 500;
   height: 35px;
 }
-.Button.green {
-  background-color: var(--green-4);
-  color: var(--green-11);
+.Button{
+  background-color: var(--blue-4);
+  color: var(--blue-11);
 }
-.Button.green:hover {
-  background-color: var(--green-5);
+.Button:hover {
+  background-color: var(--blue-5);
 }
-.Button.green:focus {
-  box-shadow: 0 0 0 2px var(--green-7);
+.Button:focus {
+  box-shadow: 0 0 0 2px var(--blue-7);
 }
