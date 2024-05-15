@@ -9,15 +9,12 @@ export default {
     'hover:bg-yellow-100',
     'hover:bg-teal-100',
     'text-blue-500',
+    'bg-red-300',
     'text-teal-500',
   ],
-
   theme: {
     extend: {},
-    fontFamily: {
-      'outfit': ['Outfit', 'sans-serif'],
-    }
   },
-
   plugins: [],
 }
+

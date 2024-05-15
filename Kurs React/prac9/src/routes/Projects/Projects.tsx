@@ -40,6 +40,7 @@ const Projects: React.FC = () => {
     }
   ];
 
+
   return (
     <div className='flex justify-center flex-col items-center'>
       <section className='flex flex-col justify-center items-center mt-16'>

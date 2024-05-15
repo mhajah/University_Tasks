@@ -17,9 +17,12 @@ interface SectionProps {
   sectionColor: string;
 }
 
+
+
 const SectionAboutMe: React.FC<SectionProps> = ({ title, items, sectionColor }) => {
   return (
     <section className='font-outfit my-8'>
+      <span className="bg-yellow-100"></span>
       <h3 className='px-20 text-4xl font-bold mb-8'>{title}</h3>
       <ul className='px-4'>
         {items.map((item, index) => (
