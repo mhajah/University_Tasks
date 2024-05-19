@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { usePotions } from '../PotionsProvider/PotionsProvider';
+import { usePotions } from '../DataProvider/DataProvider';
 import getRandomInt from './utils/getRandomInt';
 import shuffleArray from './utils/shuffleArray';
 
@@ -9,7 +9,7 @@ interface GameContextType {
   correctCounter: number;
   wrongAnswer: boolean;
   rollQuestion: (x: any) => void;
-  handleCheckAnswer: (ans:string) => void;
+  handleCheckAnswer: (ans: string) => void;
   loading: boolean;
   usedAnswers: string[];
 }
@@ -24,7 +24,7 @@ export const useGame = () => {
   return context;
 }
 
-export const GameProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
+export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { potions, getPotions, loading } = usePotions();
   const [question, setQuestion] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -33,7 +33,7 @@ export const GameProvider: React.FC<{children: React.ReactNode}> = ({ children }
   const [wrongAnswer, setWrongAnswer] = useState(false);
   const [usedAnswers, setUsedAnswers] = useState<string[]>([]);
 
-  
+
 
   useEffect(() => {
     getPotions();
@@ -64,13 +64,13 @@ export const GameProvider: React.FC<{children: React.ReactNode}> = ({ children }
     setOtherAnswers(otherAns);
   }
 
-  function handleCheckAnswer(ans:string) {
+  function handleCheckAnswer(ans: string) {
     if (ans === correctAnswer) {
       setWrongAnswer(false);
       setUsedAnswers([]);
       setCorrectCounter(correctCounter + 1);
-      rollQuestion();  
-    } 
+      rollQuestion();
+    }
     else {
       setCorrectCounter(0);
       setUsedAnswers(usedAnswers.concat(ans));

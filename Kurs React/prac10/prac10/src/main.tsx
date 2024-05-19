@@ -1,16 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import { PotionsProvider } from './Providers/PotionsProvider/PotionsProvider.tsx'
+import { DataProvider } from './Providers/DataProvider/DataProvider.tsx'
 import { GameProvider } from './Providers/GameProvider/GameProvider.tsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <PotionsProvider>
+    <DataProvider dataKind='potions'>
       <GameProvider>
         <App />
       </GameProvider>
-    </PotionsProvider>
+    </DataProvider >
   </React.StrictMode>,
 )
