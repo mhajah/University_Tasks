@@ -7,6 +7,7 @@ interface GameContextType {
   question: string;
   otherAnswers: string[];
   correctCounter: number;
+  bestScore: number;
   wrongAnswer: boolean;
   rollQuestion: (x: any) => void;
   handleCheckAnswer: (ans: string) => void;
@@ -30,6 +31,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [otherAnswers, setOtherAnswers] = useState<string[]>([]);
   const [correctCounter, setCorrectCounter] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
   const [wrongAnswer, setWrongAnswer] = useState(false);
   const [usedAnswers, setUsedAnswers] = useState<string[]>([]);
 
@@ -37,7 +39,22 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     getPotions();
+    getBestScoreFromLocalStorage();
   }, [getPotions]);
+
+  function getBestScoreFromLocalStorage() {
+    const storedBestScore = localStorage.getItem('bestScore');
+    if (storedBestScore) {
+      setBestScore(parseInt(storedBestScore));
+    }
+  }
+
+  function updateBestScore(newScore: number) {
+    if (newScore > bestScore) {
+      setBestScore(newScore);
+      localStorage.setItem('bestScore', newScore.toString());
+    }
+  }
 
   function rollQuestion() {
     const questions: any = potions["data"];
@@ -69,6 +86,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setWrongAnswer(false);
       setUsedAnswers([]);
       setCorrectCounter(correctCounter + 1);
+      updateBestScore(correctCounter + 1);
       rollQuestion();
     }
     else {
@@ -79,7 +97,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }
 
   return (
-    <GameContext.Provider value={{ question, otherAnswers, correctCounter, wrongAnswer, rollQuestion, handleCheckAnswer, loading, usedAnswers }}>
+    <GameContext.Provider value={{ question, otherAnswers, correctCounter, wrongAnswer, bestScore, rollQuestion, handleCheckAnswer, loading, usedAnswers }}>
       {children}
     </GameContext.Provider>
   );

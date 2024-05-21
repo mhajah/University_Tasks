@@ -1,229 +1,235 @@
 import random
-from copy import deepcopy
-import numpy as np
 import math
+import sys
 
 class Reversi:
-    M = 8
-    DIRS = [(0, 1), (1, 0), (-1, 0), (0, -1), (1, 1), (-1, -1), (1, -1), (-1, 1)]
+    BOARD_SIZE = 8
+    DIRECTIONS = [(0, 1), (1, 0), (-1, 0), (0, -1), (1, 1), (-1, -1), (1, -1), (-1, 1)]
+    
     def __init__(self):
-        self.board = self.initial_board()
-        self.fields = set()
-        self.move_list = []
-        self.history = []
-        for i in range(self.M):
-            for j in range(self.M):
-                if self.board[i][j] is None:
-                    self.fields.add((j, i))
+        self.board = self.initialize_board()
+        self.empty_fields = set()
+        self.moves_history = []
+        self.board_history = []
+        for row in range(self.BOARD_SIZE):
+            for col in range(self.BOARD_SIZE):
+                if self.board[row][col] is None:
+                    self.empty_fields.add((col, row))
 
-    def initial_board(self):
-        B = [[None] * self.M for _ in range(self.M)]
-        B[3][3] = 1
-        B[4][4] = 1
-        B[3][4] = 0
-        B[4][3] = 0
-        return B
+    def initialize_board(self):
+        initial_board = [[None] * self.BOARD_SIZE for _ in range(self.BOARD_SIZE)]
+        initial_board[3][3] = 1
+        initial_board[4][4] = 1
+        initial_board[3][4] = 0
+        initial_board[4][3] = 0
+        return initial_board
 
-    def moves(self, player):
-        res = []
-        for (x, y) in self.fields:
-            if any(self.can_beat(x, y, direction, player)
-                   for direction in self.DIRS):
-                res.append((x, y))
-        return res
+    def available_moves(self, player):
+        valid_moves = []
+        for (x, y) in self.empty_fields:
+            if any(self.can_capture(x, y, direction, player) for direction in self.DIRECTIONS):
+                valid_moves.append((x, y))
+        return valid_moves
 
-    def can_beat(self, x, y, d, player):
-        dx, dy = d
+    def can_capture(self, x, y, direction, player):
+        dx, dy = direction
         x += dx
         y += dy
-        cnt = 0
-        while self.get(x, y) == 1 - player:
+        captured_count = 0
+        while self.get_field(x, y) == 1 - player:
             x += dx
             y += dy
-            cnt += 1
-        return cnt > 0 and self.get(x, y) == player
+            captured_count += 1
+        return captured_count > 0 and self.get_field(x, y) == player
 
-    def get(self, x, y):
-        if 0 <= x < self.M and 0 <= y < self.M:
+    def get_field(self, x, y):
+        if 0 <= x < self.BOARD_SIZE and 0 <= y < self.BOARD_SIZE:
             return self.board[y][x]
         return None
 
-    def do_move(self, move, player):
-        self.history.append([x[:] for x in self.board])
-        self.move_list.append(move)
+    def make_move(self, move, player):
+        self.board_history.append([row[:] for row in self.board])
+        self.moves_history.append(move)
 
         if move is None:
             return
         x, y = move
         x0, y0 = move
         self.board[y][x] = player
-        self.fields -= set([move])
-        for dx, dy in self.DIRS:
+        self.empty_fields -= {move}
+        for dx, dy in self.DIRECTIONS:
             x, y = x0, y0
 
-            to_beat = []
+            captured_disks = []
             x += dx
             y += dy
-            #print(x)
-            #print(y)
-            #print("\n")
-            while self.get(x, y) == 1 - player:
-                to_beat.append((x, y))
+            while self.get_field(x, y) == 1 - player:
+                captured_disks.append((x, y))
                 x += dx
                 y += dy
-            if self.get(x, y) == player:
-                for (nx, ny) in to_beat:
+            if self.get_field(x, y) == player:
+                for (nx, ny) in captured_disks:
                     self.board[ny][nx] = player
 
-    def result(self):
-        res = 0
-        for y in range(self.M):
-            for x in range(self.M):
-                b = self.board[y][x]
-                if b == 0:
-                    res -= 1
-                elif b == 1:
-                    res += 1
-        return res
+    def evaluate_result(self):
+        score = 0
+        for row in range(self.BOARD_SIZE):
+            for col in range(self.BOARD_SIZE):
+                disk = self.board[row][col]
+                if disk == 0:
+                    score -= 1
+                elif disk == 1:
+                    score += 1
+        return score
 
     def random_move(self, player):
-        ms = self.moves(player) 
-        if ms: 
-            return random.choice(ms) 
+        moves = self.available_moves(player) 
+        if moves: 
+            return random.choice(moves) 
         return None
 
     def is_game_over(self):
-        if not self.fields: 
+        if not self.empty_fields: 
             return True
-        if len(self.move_list) < 2: 
+        if len(self.moves_history) < 2: 
             return False
-        return self.move_list[-1] == self.move_list[-2] == None 
+        return self.moves_history[-1] == self.moves_history[-2] == None 
 
+    def undo_move(self):
+        previous_board = self.board_history.pop(-1)
+        self.board = previous_board
+        last_move = self.moves_history.pop(-1)
+        self.empty_fields = self.empty_fields | {last_move}
 
-    def reverse_move(self):
-        h = self.history.pop(-1)
-        self.board = h
-        s = set([self.move_list.pop(-1)])
-        self.fields = self.fields | s
+    def print_board(self):
+        for row in self.board:
+            print(' '.join(['-' if x is None else str(x) for x in row]))
+        print()
 
 
 class Game:
-    M = 8
-    def __init__(self):
-        self.our_position = random.choice([0, 1])
-        self.player = 1
+    BOARD_SIZE = 8
+    
+    def __init__(self, verbose=False):
+        self.player_color = random.choice([0, 1])
+        self.current_player = 1
         self.reversi = Reversi()
+        self.verbose = verbose
 
     def heuristic(self, board): 
-
         player = 1
+        board_state = board.board 
+        player_moves_count = len(board.available_moves(player))  
+        opponent_moves_count = len(board.available_moves(1 - player)) 
 
-        board_arr = board.board 
-        player_moves = len(board.moves(player))  
-        opponent_moves = len(board.moves(1 - player)) 
+        opponent_disks, player_disks = 0, 0 
+        for a in [0, self.BOARD_SIZE - 1]:
+            for b in [0, self.BOARD_SIZE - 1]:
+                if board_state[a][b] == 1:
+                    player_disks += 1
+                elif board_state[a][b] == 0:
+                    opponent_disks += 1
 
-        opponent_counter, player_counter = 0, 0 
-        for a in [0, self.M - 1]:
-            for b in [0, self.M - 1]:
-                if board_arr[a][b] == 1:
-                    player_counter += 1
-                elif board_arr[a][b] == 0:
-                    opponent_counter += 1
+        disks_difference = player_disks - opponent_disks
 
-       
-        disks_diff = player_counter - opponent_counter
+        player_corner_points, opponent_corner_points = 0, 0
 
-        
-        p_corner_points, o_corner_points = 0, 0
+        if board_state[0][0] is None:
+            corner1 = [board_state[0][1], board_state[1][0], board_state[1][1]]
+            player_corner_points += corner1.count(player)
+            opponent_corner_points += corner1.count(1 - player)
+        if board_state[self.BOARD_SIZE - 1][self.BOARD_SIZE - 1] is None:
+            corner2 = [board_state[self.BOARD_SIZE - 1][self.BOARD_SIZE - 2], board_state[self.BOARD_SIZE - 2][self.BOARD_SIZE - 1], board_state[self.BOARD_SIZE - 2][self.BOARD_SIZE - 2]]
+            player_corner_points += corner2.count(player)
+            opponent_corner_points += corner2.count(1 - player)
+        if board_state[0][self.BOARD_SIZE - 1] is None:
+            corner3 = [board_state[1][self.BOARD_SIZE - 1], board_state[0][self.BOARD_SIZE - 2], board_state[1][self.BOARD_SIZE - 2]]
+            player_corner_points += corner3.count(player)
+            opponent_corner_points += corner3.count(1 - player)
+        if board_state[self.BOARD_SIZE - 1][0] is None:
+            corner4 = [board_state[self.BOARD_SIZE - 1][1], board_state[self.BOARD_SIZE - 2][0], board_state[self.BOARD_SIZE - 2][1]]
+            player_corner_points += corner4.count(player)
+            opponent_corner_points += corner4.count(1 - player)
 
-        if board_arr[0][0] is None:
-            corner1 = [board_arr[0][1], board_arr[1][0], board_arr[1][1]]
-            p_corner_points += corner1.count(player)
-            o_corner_points += corner1.count(1 - player)
-        if board_arr[self.M - 1][self.M - 1] is None:
-            corner2 = [board_arr[self.M - 1][self.M - 2], board_arr[self.M - 2][self.M - 1], board_arr[self.M - 2][self.M - 2]]
-            p_corner_points += corner2.count(player)
-            o_corner_points += corner2.count(1 - player)
-        if board_arr[0][self.M - 1] is None:
-            corner3 = [board_arr[1][self.M - 1], board_arr[0][self.M - 2], board_arr[1][self.M - 2]]
-            p_corner_points += corner3.count(player)
-            o_corner_points += corner3.count(1 - player)
-        if board_arr[self.M - 1][0] is None:
-            corner4 = [board_arr[self.M - 1][1], board_arr[self.M - 2][0], board_arr[self.M - 2][1]]
-            p_corner_points += corner4.count(player)
-            o_corner_points += corner4.count(1 - player)
+        corner_difference =  player_corner_points - opponent_corner_points
 
-        corner_diff =  p_corner_points - o_corner_points
-
-        if player_moves > opponent_moves:
-            m = (100 * player_moves) / (player_moves + opponent_moves)
-            #print("Player wiecej = " + str(player_moves - opponent_moves))
-        elif player_moves < opponent_moves:
-            m = -(100 * opponent_moves) / (player_moves + opponent_moves)
-            #print("Oponent wiecej = " + str(player_moves - opponent_moves))
+        if player_moves_count > opponent_moves_count:
+            mobility = (100 * player_moves_count) / (player_moves_count + opponent_moves_count)
+        elif player_moves_count < opponent_moves_count:
+            mobility = -(100 * opponent_moves_count) / (player_moves_count + opponent_moves_count)
         else:
-            m = 0
+            mobility = 0
 
-        v = 200 * disks_diff - 10 * corner_diff +  m
-        return v
+        board_value = 200 * disks_difference - 10 * corner_difference +  mobility
+        return board_value
 
-    def minimax_move(self, player, depth, board):
+    def minimax_decision(self, player, depth, board):
         best_move = None
         if depth == 0 or board.is_game_over():
-            v = self.heuristic(board)
-            return v, best_move
-        moves = board.moves(player)
-        if len(moves) == 0:
-            v = self.heuristic(board)
-            return v, best_move
+            board_value = self.heuristic(board)
+            return board_value, best_move
+        available_moves = board.available_moves(player)
+        if not available_moves:
+            board_value = self.heuristic(board)
+            return board_value, best_move
         if player:
-            value = -math.inf
-            for move in moves:
-                board.do_move(move, player)
-                new_value, _ = self.minimax_move(1 - player, depth - 1, board)
-                board.reverse_move()
-                if new_value > value:
-                    value = new_value
+            max_value = -math.inf
+            for move in available_moves:
+                board.make_move(move, player)
+                new_value, _ = self.minimax_decision(1 - player, depth - 1, board)
+                board.undo_move()
+                if new_value > max_value:
+                    max_value = new_value
                     best_move = move
-            return value, best_move
+            return max_value, best_move
         else:
-            value = math.inf
-            for move in moves:
-                board.do_move(move, player)
-                new_value, _ = self.minimax_move(1 - player, depth - 1, board)
-                board.reverse_move()
-                if new_value < value:
-                    value = new_value
+            min_value = math.inf
+            for move in available_moves:
+                board.make_move(move, player)
+                new_value, _ = self.minimax_decision(1 - player, depth - 1, board)
+                board.undo_move()
+                if new_value < min_value:
+                    min_value = new_value
                     best_move = move
-            return value, best_move
+            return min_value, best_move
 
-    def play(self):
-        depth = 2
+    def play_game(self):
+        search_depth = 2
         while not self.reversi.is_game_over():
-            if self.player == self.our_position:
-                val, move = self.minimax_move(self.player, depth, self.reversi)
+            if self.verbose:
+                print("Current board:")
+                self.reversi.print_board()
+            if self.current_player == self.player_color:
+                val, move = self.minimax_decision(self.current_player, search_depth, self.reversi)
+                if self.verbose:
+                    print(f"AI moves: {move}")
             else:
-                move = self.reversi.random_move(self.player)
-            self.reversi.do_move(move, self.player)
-            self.player = 1 - self.player
+                move = self.reversi.random_move(self.current_player)
+                if self.verbose:
+                    print(f"Random moves: {move}")
+            self.reversi.make_move(move, self.current_player)
+            self.current_player = 1 - self.current_player
 
-        if self.our_position:
-            return self.reversi.result() > 0
+        if self.verbose:
+            print("Final board:")
+            self.reversi.print_board()
+        if self.player_color:
+            return self.reversi.evaluate_result() > 0
         else:
-            return self.reversi.result() < 0
+            return self.reversi.evaluate_result() < 0
 
 
+verbose = False 
+if len(sys.argv) > 1 and sys.argv[1] == '--verbose':
+        verbose = True
 
-board = Reversi()
-print(board.moves(1))
+game_board = Reversi()
+print(game_board.available_moves(1))
 
-board.do_move((4, 2), 1)
-wins = 0
-for i in range(1000):
-    g = Game()
-    if g.play():
-        #print(str(i) + ". wygrana")
-        wins += 1
-    #else:
-        #print(str(i) + ". przegrana")
-print("wygrano: " + str(wins))
+game_board.make_move((4, 2), 1)
+win_count = 0
+for _ in range(1000):
+    game_instance = Game(verbose=verbose)
+    if game_instance.play_game():
+        win_count += 1
+print("Wins: " + str(win_count))
